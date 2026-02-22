@@ -243,37 +243,113 @@
     }
 </style>
 
+<style>
+    /* MASTER SHELL: Maintains the 15px rhythm */
+    .console-shell {
+        background: rgba(10, 10, 11, 0.98);
+        border: 1px solid rgba(179, 139, 77, 0.3);
+        border-radius: 20px;
+        width: 90% !important;
+        max-width: 1200px !important;
+        margin: 15px auto !important;
+        padding: 0; /* Flush edges for the split look */
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    @media screen and (min-width: 1024px) {
+        .console-shell {
+            flex-direction: row; /* THE WINDOWS SIDE-BY-SIDE */
+            min-height: 500px;
+        }
+    }
+
+    /* LEFT SIDE: THE UTILITY CARDS */
+    .utility-side {
+        padding: 40px;
+        flex: 1.2;
+        border-bottom: 1px solid rgba(179, 139, 77, 0.1);
+    }
+
+    @media screen and (min-width: 1024px) {
+        .utility-side {
+            border-bottom: none;
+            border-right: 1px solid rgba(179, 139, 77, 0.1);
+        }
+    }
+
+    /* RIGHT SIDE: THE "LIVE STATUS" MEME FEED */
+    .status-side {
+        padding: 40px;
+        flex: 0.8;
+        background: rgba(179, 139, 77, 0.02);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    /* GLASS CARDS */
+    .console-card {
+        background: rgba(255, 255, 255, 0.03);
+        margin-bottom: 12px;
+        padding: 20px;
+        border-radius: 12px;
+        border-left: 4px solid #b38b4d;
+        transition: 0.3s;
+    }
+
+    .console-card:hover {
+        background: rgba(179, 139, 77, 0.08);
+        transform: translateX(10px);
+    }
+
+    .status-pill {
+        display: inline-block;
+        padding: 4px 12px;
+        background: rgba(179, 139, 77, 0.2);
+        color: #b38b4d;
+        border-radius: 20px;
+        font-size: 10px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        margin-bottom: 10px;
+    }
+</style>
+
 <section id="tpl-utility">
-    <div class="dashboard-shell">
-        <div style="display:flex; align-items:center; gap:12px; margin-bottom:35px; color:#fff; font-family:'Inter'; font-weight:bold; letter-spacing:2px; text-transform:uppercase;">
-            <span style="width:4px; height:18px; background:#b38b4d;"></span> $TPL DASHBOARD
+    <div class="console-shell">
+        
+        <div class="utility-side">
+            <div style="color:#b38b4d; font-family:'Bebas Neue'; letter-spacing:2px; margin-bottom:20px;">SYSTEM UTILITIES</div>
+            
+            <div class="console-card">
+                <div style="color:#fff; font-weight:bold; font-size:16px;">STAKE-TO-STEWARD</div>
+                <div style="color:rgba(255,255,255,0.5); font-size:13px;">Lock $TPL. Earn yield. Protect the legacy.</div>
+            </div>
+
+            <div class="console-card">
+                <div style="color:#fff; font-weight:bold; font-size:16px;">DAO GOVERNANCE</div>
+                <div style="color:rgba(255,255,255,0.5); font-size:13px;">Your NFT is your vote on project grants.</div>
+            </div>
+
+            <div class="console-card">
+                <div style="color:#fff; font-weight:bold; font-size:16px;">LAUNCHPAD ACCESS</div>
+                <div style="color:rgba(255,255,255,0.5); font-size:13px;">Guaranteed WL for all ecosystem projects.</div>
+            </div>
         </div>
 
-        <div class="utility-ribbon">
-            <div class="dash-card">
-                <div class="dash-title">🔒 STAKING</div>
-                <p class="dash-text">Lock $TPL to secure the network and earn "Steward Points" for exclusive airdrops.</p>
-            </div>
-            <div class="dash-card">
-                <div class="dash-title">🏢 GRANTS</div>
-                <p class="dash-text">Direct funding for Niger Delta growth. You vote on which projects get bootstrapped.</p>
-            </div>
-            <div class="dash-card">
-                <div class="dash-title">🎨 GOVERNANCE</div>
-                <p class="dash-text">Your NFT is your signature. Participate in the first on-chain Niger Delta DAO.</p>
-            </div>
-            <div class="dash-card">
-                <div class="dash-title">📡 DATA</div>
-                <p class="dash-text">Oracle-verified data tracking real-world restoration efforts in real-time.</p>
-            </div>
-            <div class="dash-card">
-                <div class="dash-title">🚀 LAUNCHPAD</div>
-                <p class="dash-text">Guaranteed whitelist for every ecosystem project. The Gold Standard launchpad.</p>
-            </div>
+        <div class="status-side">
+            <div class="status-pill">● SYSTEM LIVE</div>
+            <h2 style="color:#fff; font-family:'Bebas Neue'; font-size:32px; line-height:1; margin-bottom:15px;">TOTAL STEWARDSHIP <br><span style="color:#b38b4d;">ON-CHAIN</span></h2>
+            <p style="color:rgba(255,255,255,0.5); font-size:14px; margin-bottom:25px;">
+                While others extract, we build. Join the first decentralized infrastructure project for the people.
+            </p>
+            <a href="#" style="color:#b38b4d; font-weight:bold; text-decoration:none; font-size:14px;">EXPLORE THE HUB →</a>
         </div>
+
     </div>
 </section>
-
 
 <section id="roadmap">
     <div class="universal-shell">
