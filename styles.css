@@ -1,49 +1,353 @@
+html, body {
+    max-width: 100% !important;
+    overflow-x: hidden !important; /* Kills the side-to-side jump */
+    position: relative;
+}
+
+
 :root {
-    --gold: #D4AF37;
-    --dark: #0a0a0a;
+    --deep-charcoal: #0a0a0b; /* The base dark color from image 3 */
+    --muted-gold: #b38b4d;    /* The dark brownish gold tone */
+    --gold-glow: rgba(179, 139, 77, 0.3);
+    --glass-bg: rgba(15, 15, 17, 0.7);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: #000; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
-/* LOGO & TITLES */
-.logo, h1 { font-family: 'Bangers', cursive; color: var(--gold); }
-
-/* METALLIC SHINE */
-.metallic-shine {
-    background: linear-gradient(to bottom, var(--gold) 0%, #fff 50%, var(--gold) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+body {
+    margin: 0;
+    padding: 0;
+    /* This is the exact deep-dark background from your first image */
+    background-color: #05070a; 
+    min-height: 100vh;
+    font-family: 'Bebas Neue', sans-serif;
+    overflow-x: hidden;
 }
 
-/* THE CENTERED POP-DOWN */
-.side-menu {
+body::before {
+    content: "";
     position: fixed;
-    top: 100px; left: 50%;
-    transform: translateX(-50%);
-    width: 0; opacity: 0;
-    background: rgba(15, 15, 15, 0.98);
-    backdrop-filter: blur(15px);
-    border-radius: 20px;
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    transition: 0.4s ease-in-out;
-    display: flex; flex-direction: column; align-items: center;
-    z-index: 9999; overflow: hidden; padding: 20px 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Darker overlay to make the image blend into the deep background */
+    background: linear-gradient(rgba(5, 7, 10, 0.9), rgba(5, 7, 10, 0.95)),
+                url("Backgroundtom.jpg") no-repeat center center;
+    background-size: cover;
+    filter: blur(50px);
+    z-index: -1;
+    transform: scale(1.1);
+}
+body {
+    background-color: #05070a; /* Midnight Charcoal */
+    margin: 0;
+    color: #ffffff;
+    font-family: 'Inter', -apple-system, sans-serif; /* Clean professional font */
 }
 
-.side-menu a { color: #fff; text-decoration: none; padding: 15px; font-family: 'Bangers'; font-size: 1.5rem; }
 
-/* THE HERO RESPONSIVE FIX */
-.hero {
-    display: flex; flex-direction: column; /* Mobile */
-    align-items: center; text-align: center;
-    padding: 120px 20px 40px; gap: 40px;
+.main-content {
+    position: relative;
+    z-index: 1; /* Ensures your text and coin stay sharp and on top */
+    text-align: center;
+    padding-top: 120px;
 }
 
-@media (min-width: 992px) {
-    .hero { flex-direction: row; text-align: left; justify-content: space-around; }
-    .hero-text { flex: 1; max-width: 500px; }
-    .hero-image { flex: 1; display: flex; justify-content: flex-end; }
+/* Base Navbar - The Wrapper */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 60px;
+    background: #000000;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #b38b4d;
 }
 
-.hero-image img { width: 100%; max-width: 450px; filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.4)); }
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 15px;
+}
+.brand-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-logo {
+    height: 30px; /* Small enough so it doesn't push the header down */
+    width: auto;
+}
+
+.brand-text {
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+}
+
+/* The "Box" inspired by your image */
+.nav-container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Thin border like the image */
+    padding: 10px 20px;
+    background: rgba(0,0,0,0.9);
+}
+
+.brand-text {
+    color: white;
+    font-size: 20px;
+    font-family: 'Luckiest Guy', cursive; /* Back to your font */
+    letter-spacing: 1px;
+}
+
+.menu-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 2px;
+    background-color: #b38b4d;
+}
+/* Mobile Links */
+.nav-links {
+    display: none;
+    flex-direction: column;
+    text-align: center;
+    position: absolute;
+    top: 75px; 
+    left: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.95);
+    border-bottom: 2px solid gold; /* Kept your gold border */
+    backdrop-filter: blur(10px);
+    animation: dropFade 0.35s ease;
+}
+
+.nav-links.show {
+    display: flex;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 18px;
+    display: block;
+    font-size: 24px;
+    font-family: 'Luckiest Guy', cursive; /* Kept your font */
+    letter-spacing: 1px;
+}
+
+@keyframes dropFade {
+    from { opacity: 0; transform: translateY(-15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Windows / Desktop View */
+@media (min-width: 768px) {
+    .nav-links {
+        display: flex !important;
+        position: static;
+        flex-direction: row;
+        background: transparent;
+        border-bottom: none; /* Removes mobile gold border on desktop */
+        width: auto;
+    }
+
+    .nav-links a {
+        padding: 0 18px;
+        font-size: 16px; /* Smaller for desktop elegance */
+    }
+
+    .menu-toggle {
+        display: none; /* Hides the toggle on Windows */
+    }
+}
+
+
+/* KILL THE BOX LOOK */
+/* THE OUTER WRAPPER (Full width background) */
+.hero-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Centers the content box */
+    padding-top: 100px;
+    background: transparent;
+}
+
+/* THE BOX THAT MATCHES YOUR OTHER SECTIONS */
+.hero-wrapper .section-container {
+    width: 90%;
+    max-width: 1200px; /* Same width as your Manifesto section */
+    margin: 0 auto;
+    border-bottom: 2px solid #b38b4d; /* The Yellow/Gold line you wanted */
+    padding-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.hero-title {
+    font-size: 32px;
+    line-height: 1.2;
+    color: #ffffff;
+    margin-bottom: 30px;
+    max-width: 90%; /* Keeps text from touching the very edge */
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+/* Ensure buttons don't have box-shadows that look like extra lines */
+.btn-primary, .btn-secondary {
+    border-radius: 4px;
+    padding: 12px 24px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-primary {
+    background: #b38b4d;
+    color: #000;
+}
+
+.btn-secondary {
+    border: 1px solid #b38b4d;
+    color: #b38b4d;
+}
+
+
+.about-section {
+    padding: 20px 20px 60px; /* Changed top padding from 60px to 20px */
+    display: flex;
+    justify-content: center;
+    .about-section {
+    padding-top: 0 !important;    /* Removes top internal space */
+    margin-top: 0; 
+}
+/* Remove top padding so image hits the edges */
+.about-card {
+    padding: 0 0 60px 0; /* No top padding, 60px bottom */
+    overflow: hidden; /* Keeps the image corners rounded to match the box */
+    background: #0a0a0b; /* Solid base for blending */
+}
+
+/* Image Wrapper */
+.about-image-wrapper {
+    position: relative;
+    width: 100%;
+    /* Increase height or change to auto if you want the full image aspect ratio */
+    height: auto; 
+    aspect-ratio: 16 / 9; /* This maintains a cinematic shape without cutting as much */
+    max-height: 500px; /* Prevents it from getting too tall on large Windows monitors */
+}
+
+.about-hero-img {
+    width: 100%;
+    height: 100%;
+    /* 'object-position' allows you to control which part of the image is centered. 
+       'top' ensures the person's face isn't cut off. */
+    object-fit: cover;
+    object-position: center 20%; 
+    display: block;
+}
+
+/* Ensure the gradient blend still sits perfectly at the bottom of the image */
+.image-overlay-gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%; /* Adjust this if you want more or less of the image to be clear */
+    background: linear-gradient(to bottom, rgba(10, 10, 11, 0) 0%, #0a0a0b 100%);
+}
+
+/* THE BLENDING GRADIENT */
+.image-overlay-gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60%; /* Fades the bottom half of the image */
+    background: linear-gradient(to bottom, rgba(10, 10, 11, 0) 0%, #0a0a0b 100%);
+}
+
+/* Re-apply padding to the text content only */
+.about-card .brand-eyebrow,
+.about-card .about-title,
+.about-card .about-content {
+    padding: 0 40px; /* Keeps text aligned and away from edges */
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .about-image-wrapper {
+        height: 200px; /* Shorter image on phones */
+    }
+    .about-card .brand-eyebrow,
+    .about-card .about-title,
+    .about-card .about-content {
+        padding: 0 20px;
+    }
+}
+
+.about-section {
+    padding-top: 0 !important; /* Removes the top internal space of the About box */
+    margin-top: -10px !important; /* Optional: Pulls it up slightly more to overlap if needed */
+}
+
+.about-section {
+    position: relative !important;
+    top: -120px !important; /* This physically slides the section UP */
+    margin-bottom: -120px !important; /* This pulls the content below it up as well */
+    z-index: 10; /* Ensures it stays on top of any background shadows */
+}
+
+
+
+/* Ensure no hidden padding is blocking the shift */
+.about-card {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+.about-content p strong {
+    color: #b38b4d; /* Your signature dark gold */
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    }
+    
+    /* Shifting the Manifesto text down */
+.about-text-container {
+    padding-top: 30px !important; /* Adjust this number to shift it further down */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Optional: Add space specifically above the 'THE MANIFESTO' line */
+.about-text-container .brand-eyebrow {
+    margin-top: 20px;
+    margin-bottom: 15px; /* Keeps space between the label and the title */
+}
+
+
+.about-title {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    text-transform: uppercase;
+    line-height: 1.05;
+    margin-bottom: 25px;
+}
