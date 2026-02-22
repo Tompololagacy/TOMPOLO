@@ -50,7 +50,7 @@
     .label-group { display: flex; align-items: center; gap: 12px; margin-bottom: 30px; color: #fff; font-family: 'Inter'; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; }
     
     /* ROADMAP LOG STYLE */
-    .log-container { position: relative; padding-left: 30px; }
+    .log-container { position: relative; padding-left: 30px; } 
     .log-line { position: absolute; left: 0; top: 0; width: 2px; height: 100%; background: linear-gradient(to bottom, #b38b4d, rgba(179, 139, 77, 0.1)); }
     .log-entry { margin-bottom: 40px; position: relative; }
     .log-dot { position: absolute; left: -36px; top: 5px; width: 12px; height: 12px; background: #0a0a0b; border: 2px solid #b38b4d; border-radius: 50%; }
@@ -317,40 +317,109 @@
     }
 </style>
 
+<style>
+    /* MASTER SHELL: Maintains the 15px vertical rhythm */
+    .utility-console {
+        background: rgba(10, 10, 11, 0.95);
+        border: 1px solid rgba(179, 139, 77, 0.25);
+        border-radius: 20px;
+        width: 90% !important;
+        max-width: 1200px !important;
+        margin: 15px auto !important;
+        padding: 0;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    @media screen and (min-width: 1024px) {
+        .utility-console { flex-direction: row; min-height: 550px; }
+    }
+
+    /* LEFT SIDE: THE MECHANISMS */
+    .mechanisms-side {
+        padding: 40px;
+        flex: 1.2;
+        border-bottom: 1px solid rgba(179, 139, 77, 0.1);
+    }
+
+    @media screen and (min-width: 1024px) {
+        .mechanisms-side { border-bottom: none; border-right: 1px solid rgba(179, 139, 77, 0.1); }
+    }
+
+    /* RIGHT SIDE: THE PARTNERSHIP/STATUS FEED */
+    .partnership-side {
+        padding: 40px;
+        flex: 0.8;
+        background: linear-gradient(145deg, rgba(179, 139, 77, 0.03), transparent);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .u-card {
+        background: rgba(255, 255, 255, 0.03);
+        margin-bottom: 15px;
+        padding: 25px;
+        border-radius: 12px;
+        border-left: 3px solid #b38b4d;
+        transition: 0.3s ease;
+    }
+
+    .u-card:hover { background: rgba(179, 139, 77, 0.08); transform: translateX(8px); }
+
+    .tantita-badge {
+        display: inline-block;
+        padding: 6px 15px;
+        background: rgba(179, 139, 77, 0.15);
+        color: #b38b4d;
+        border: 1px solid #b38b4d;
+        border-radius: 4px;
+        font-family: 'Bebas Neue';
+        font-size: 12px;
+        letter-spacing: 1px;
+        margin-bottom: 20px;
+    }
+</style>
+
 <section id="tpl-utility">
-    <div class="console-shell">
+    <div class="utility-console">
         
-        <div class="utility-side">
-            <div style="color:#b38b4d; font-family:'Bebas Neue'; letter-spacing:2px; margin-bottom:20px;">SYSTEM UTILITIES</div>
+        <div class="mechanisms-side">
+            <div style="color:#b38b4d; font-family:'Bebas Neue'; letter-spacing:2px; margin-bottom:25px;">UTILITY & INCENTIVES</div>
             
-            <div class="console-card">
-                <div style="color:#fff; font-weight:bold; font-size:16px;">STAKE-TO-STEWARD</div>
-                <div style="color:rgba(255,255,255,0.5); font-size:13px;">Lock $TPL. Earn yield. Protect the legacy.</div>
+            <div class="u-card">
+                <div style="color:#fff; font-family:'Bebas Neue'; font-size:20px; margin-bottom:5px;">🔒 STAKE-TO-EARN (8M VOW)</div>
+                <div style="color:rgba(255,255,255,0.5); font-size:13px; line-height:1.5;">Reward your commitment. Stake tokens for a minimum of 8 months to unlock high-yield stewardship rewards.</div>
             </div>
 
-            <div class="console-card">
-                <div style="color:#fff; font-weight:bold; font-size:16px;">DAO GOVERNANCE</div>
-                <div style="color:rgba(255,255,255,0.5); font-size:13px;">Your NFT is your vote on project grants.</div>
+            <div class="u-card">
+                <div style="color:#fff; font-family:'Bebas Neue'; font-size:20px; margin-bottom:5px;">🏢 BIZ SUPPORT SYSTEM</div>
+                <div style="color:rgba(255,255,255,0.5); font-size:13px; line-height:1.5;">Interest-free grants and empowerment for small businesses within the ecosystem based on your holder rank.</div>
             </div>
 
-            <div class="console-card">
-                <div style="color:#fff; font-weight:bold; font-size:16px;">LAUNCHPAD ACCESS</div>
-                <div style="color:rgba(255,255,255,0.5); font-size:13px;">Guaranteed WL for all ecosystem projects.</div>
+            <div class="u-card">
+                <div style="color:#fff; font-family:'Bebas Neue'; font-size:20px; margin-bottom:5px;">🎨 GOVERNANCE POWER</div>
+                <div style="color:rgba(255,255,255,0.5); font-size:13px; line-height:1.5;">Use your weighted voting power to choose which community projects receive direct legacy funding.</div>
             </div>
         </div>
 
-        <div class="status-side">
-            <div class="status-pill">● SYSTEM LIVE</div>
-            <h2 style="color:#fff; font-family:'Bebas Neue'; font-size:32px; line-height:1; margin-bottom:15px;">TOTAL STEWARDSHIP <br><span style="color:#b38b4d;">ON-CHAIN</span></h2>
-            <p style="color:rgba(255,255,255,0.5); font-size:14px; margin-bottom:25px;">
-                While others extract, we build. Join the first decentralized infrastructure project for the people.
+        <div class="partnership-side">
+            <div class="tantita-badge">SECURED BY TANTITA</div>
+            <h2 style="color:#fff; font-family:'Bebas Neue'; font-size:36px; line-height:1; margin-bottom:15px;">REAL-WORLD <br><span style="color:#b38b4d;">VALUE SYNC</span></h2>
+            <p style="color:rgba(255,255,255,0.6); font-size:14px; line-height:1.6; margin-bottom:20px;">
+                Our partnership with <strong>Tantita Security Services Nigeria Limited</strong> ensures that community participation drives real-world value generation beyond the blockchain.
             </p>
-            <a href="#" style="color:#b38b4d; font-weight:bold; text-decoration:none; font-size:14px;">EXPLORE THE HUB →</a>
+            <div style="height:2px; width:40px; background:#b38b4d; margin-bottom:20px;"></div>
+            <p style="color:rgba(255,255,255,0.4); font-size:12px; font-style:italic;">
+                "Stewardship of the land. Empowerment for the future."
+            </p>
         </div>
 
     </div>
 </section>
 
+    
 <section id="roadmap">
     <div class="universal-shell">
         <div class="label-group"><span class="gold-accent"></span> STRATEGIC ROADMAP</div>
