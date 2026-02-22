@@ -306,18 +306,9 @@ body {
 }
 
 .about-section {
-    padding-top: 0 !important; /* Removes the top internal space of the About box */
-    margin-top: -10px !important; /* Optional: Pulls it up slightly more to overlap if needed */
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
 }
-
-.about-section {
-    position: relative !important;
-    top: -120px !important; /* This physically slides the section UP */
-    margin-bottom: -120px !important; /* This pulls the content below it up as well */
-    z-index: 10; /* Ensures it stays on top of any background shadows */
-}
-
-
 
 /* Ensure no hidden padding is blocking the shift */
 .about-card {
@@ -329,7 +320,12 @@ body {
     color: #b38b4d; /* Your signature dark gold */
     font-weight: 900;
     letter-spacing: 0.5px;
+    margin-bottom: 10px;
     }
+    
+    .about-content p:last-child {
+    margin-bottom: 0 !important;
+}
     
     /* Shifting the Manifesto text down */
 .about-text-container {
@@ -350,4 +346,25 @@ body {
     text-transform: uppercase;
     line-height: 1.05;
     margin-bottom: 25px;
+}
+}
+
+/* THE MASTER CONTAINER *
+/* 1. Kill the invisible cushion at the bottom of the About Section */
+.about-section {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* 2. Standardize the gap for ALL boxes (Utilities & Roadmap) */
+.universal-shell {
+    /* This forces the top of the box to sit 15px away from whatever is above it */
+    margin-top: 15px !important; 
+    /* This forces the bottom of the box to sit 15px away from whatever is below it */
+    margin-bottom: 15px !important; 
+}
+
+/* 3. Ensure the last line of text doesn't add its own extra gap */
+.about-content p:last-child {
+    margin-bottom: 5px !important;
 }
