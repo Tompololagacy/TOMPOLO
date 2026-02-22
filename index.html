@@ -15,7 +15,7 @@
         border-radius: 20px;
         padding: 30px 20px;
         box-sizing: border-box !important;
-        /* MOBILE VIEW: Correct gaps */
+        /* MOBILE VIEW: Correct pgaps */
         width: 90% !important; 
         margin: 20px auto !important; 
         margin-top: 15px !important; 
@@ -84,23 +84,82 @@
     </div>
 </section>
 
+<style>
+    /* UPDATED ABOUT SECTION CSS */
+    .about-section {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        background: transparent; /* Let the shell handle the background */
+    }
+
+    /* WE WRAP THE CONTENT IN THE SAME SHELL AS UTILITIES */
+    .about-container-fixed {
+        background: rgba(10, 10, 11, 0.9);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(179, 139, 77, 0.25);
+        border-radius: 20px;
+        overflow: hidden; /* Keeps the top image from spilling out */
+        
+        /* MATCHES UTILITIES & ROADMAP EXACTLY */
+        width: 90% !important;
+        max-width: 1200px !important;
+        margin: 20px auto !important;
+    }
+
+    .about-hero-img {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover;
+    }
+
+    .about-text-content {
+        padding: 40px;
+    }
+
+    @media screen and (min-width: 1024px) {
+        .about-container-fixed {
+            margin: 40px auto !important;
+        }
+        .about-text-content {
+            padding: 60px;
+        }
+    }
+</style>
+
 <section class="about-section" id="about">
-    <div class="about-card fade-in">
+    <div class="about-container-fixed">
+        
         <div class="about-image-wrapper">
-            <img src="Logo2.jpg" alt="Celebrating the Legacy of Tompolo" class="about-hero-img">
-            <div class="image-overlay-gradient"></div>
+            <img src="Logo2.jpg" alt="Tompolo Legacy" class="about-hero-img">
         </div>
-        <div class="about-text-container">
-            <div class="brand-eyebrow"><span class="gold-accent-line"></span> THE MANIFESTO</div>
-            <h2 class="about-title">The struggles of the trenches. <br>The stewardship of the land.</h2>
-            <div class="about-content">
-                <p>Stop chasing ghost projects and paper-thin promises. <strong>Tompolo Legacy</strong> is the absolute Gold Standard of Web3.</p>
-                <p>We aren't just building a coin; we’re building a fortress. While the others extract, we restore.</p>
-                <p><strong>The mission is simple:</strong> Secure the land, empower the people, and let the legacy moon.</p>
+
+        <div class="about-text-content">
+            <div class="brand-eyebrow">
+                <span class="gold-accent-line"></span> THE MANIFESTO
+            </div>
+
+            <h2 class="about-title" style="color:#fff; font-family:'Bebas Neue'; font-size: 32px; margin-bottom:20px;">
+                The struggles of the trenches. <br>
+                The stewardship of the land.
+            </h2>
+
+            <div class="about-content" style="color:rgba(255,255,255,0.7); line-height:1.6;">
+                <p style="margin-bottom:15px;">
+                    Stop chasing ghost projects and paper-thin promises. <strong>Tompolo Legacy</strong> is the absolute Gold Standard of Web3 born in the struggle, forged for the community, and destined for the throne.
+                </p>
+                <p style="margin-bottom:15px;">
+                    We aren't just building a coin; we’re building a fortress. While the others extract, we restore. While they dump, we build.
+                </p>
+                <p style="margin-bottom:0;">
+                    <strong>The mission is simple:</strong> Secure the land, empower the people, and let the legacy moon.
+                </p>
             </div>
         </div>
     </div>
 </section>
+
 
 <section id="tpl-utility">
     <div class="universal-shell">
