@@ -1,57 +1,362 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tompolo Legacy — The Gold Standard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+
+<title>Tompolo Legacy</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-    <header class="header">
-        <div class="logo">TOMPOLO LEGACY</div>
-        <nav class="desktop-nav">
-            <a href="#about">About</a>
-            <a href="#roadmap">Roadmap</a>
-            <a href="#contact">Community</a>
-        </nav>
-        <div class="hamburger" onclick="toggleMenu()">
-            <div class="line"></div><div class="line"></div><div class="line"></div>
+<!-- HEADER -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="brand-group">
+            <img src="Logo1.png" class="nav-logo">
+            <span class="brand-text">TOMPOLO LEGACY</span>
         </div>
-    </header>
+        
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
 
-    <div id="side-menu" class="side-menu">
-        <a href="#about" onclick="toggleMenu()">About</a>
-        <a href="#roadmap" onclick="toggleMenu()">Roadmap</a>
-        <button class="wallet-btn" onclick="window.location.href='#contact'">JOIN COMMUNITY</button>
+        <div class="nav-links" id="navLinks">
+            <a href="#about">ABOUT</a>
+            <a href="#roadmap">ROADMAP</a>
+            <a href="#community">COMMUNITY</a>
+        </div>
+    </div>
+</nav>
+    
+
+<section class="hero-wrapper">
+    <div class="section-container"> <div class="brand-eyebrow">TOMPOLO LEGACY</div>
+        <h1 class="hero-title">From struggle to stewardship. <br>Protecting the land, people, and future.</h1>
+        <div class="hero-buttons">
+            <a href="#" class="btn-primary">JOIN THE LEGACY</a>
+            <a href="#" class="btn-secondary">WHITEPAPER</a>
+        </div>
+    </div>
+</section>
+
+<section class="about-section">
+    <div class="about-card fade-in">
+        
+        <div class="about-image-wrapper">
+            <img src="Logo2.jpg" alt="Celebrating the Legacy of Tompolo" class="about-hero-img">
+            <div class="image-overlay-gradient"></div>
+        </div>
+
+      <div class="about-text-container">
+    <div class="brand-eyebrow">
+        <span class="gold-accent-line"></span> THE MANIFESTO
     </div>
 
-    <section class="hero">
-        <div class="hero-text">
-            <h1 class="metallic-shine">TOMPOLO LEGACY</h1>
-            <p>The Gold Standard of Meme Utility</p>
-            <div class="hero-buttons">
-                <button class="btn-gold">Buy Token</button>
-                <button class="btn-outline">Whitepaper</button>
+    <h2 class="about-title">
+        The struggles of the trenches. <br>
+        The stewardship of the land.
+    </h2>
+
+    <div class="about-content">
+        <p>
+            Stop chasing ghost projects and paper-thin promises. <strong>Tompolo Legacy</strong> is the absolute Gold Standard of Web3 born in the struggle, forged for the community, and destined for the throne.
+        </p>
+        <p>
+            We aren't just building a coin; we’re building a fortress. While the others extract, we restore. While they dump, we build. We are the stewards of the future, turning resistance into real-world utility and generational wealth.
+        </p>
+        <p>
+            <strong>The mission is simple:</strong> Secure the land, empower the people, and let the legacy moon. No more extraction. Total stewardship.
+        </p>
+    </div>
+</div>
+
+</section>
+
+
+<style>
+    #tpl-utility {
+        padding: 0 0 80px 0; 
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        background: transparent;
+    }
+
+    #tpl-utility .section-container {
+        width: 90%;
+        max-width: 1200px;
+    }
+
+    /* MANIFESTO STYLE TITLE */
+    .utility-label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 25px;
+        color: white;
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+    .gold-line {
+        width: 4px;
+        height: 16px;
+        background-color: #b38b4d;
+        display: inline-block;
+    }
+
+    /* CARD DESIGN */
+    .utility-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .utility-card {
+        width: 100%;
+        background: rgba(15, 15, 17, 0.95);
+        border-radius: 12px;
+        padding: 25px;
+        border: 1px solid rgba(179, 139, 77, 0.1);
+        border-left: 3px solid #b38b4d;
+        box-sizing: border-box;
+        transition: all 0.4s ease;
+    }
+
+    /* ICON GLOW EFFECT */
+    .u-icon {
+        font-size: 24px;
+        filter: drop-shadow(0 0 8px rgba(179, 139, 77, 0.8)); /* Catchy gold glow */
+    }
+
+    /* WHITE HEADINGS */
+    .utility-heading {
+        margin: 0;
+        color: #ffffff !important; /* Forced White */
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 22px;
+        letter-spacing: 1.5px;
+    }
+
+    /* WINDOWS / DESKTOP BOX VIEW */
+    @media screen and (min-width: 900px) {
+        .utility-card {
+            width: calc(50% - 10px); 
+            min-height: 160px;
+            border-left: 1px solid rgba(179, 139, 77, 0.2);
+            border-bottom: 4px solid #b38b4d;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .utility-card:hover {
+            transform: translateY(-10px);
+            background: rgba(179, 139, 77, 0.08);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.7), 0 0 15px rgba(179, 139, 77, 0.2);
+        }
+    }
+
+    .utility-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+
+    .utility-description {
+        color: rgba(255, 255, 255, 0.65);
+        font-size: 14px;
+        line-height: 1.6;
+        margin: 0;
+    }
+</style>
+
+<section id="tpl-utility">
+    <div class="section-container">
+        <div class="utility-label">
+            <span class="gold-line"></span> $TPL UTILITIES
+        </div>
+
+        <div class="utility-list">
+            <div class="utility-card">
+                <div class="utility-header">
+                    <span class="u-icon">🔒</span> 
+                    <h3 class="utility-heading">STAKE & PROTECT</h3>
+                </div>
+                <p class="utility-description">Lock your legacy. Earn yield and "Steward Points" for exclusive drops.</p>
+            </div>
+            
+            <div class="utility-card">
+                <div class="utility-header">
+                    <span class="u-icon">🏢</span> 
+                    <h3 class="utility-heading">LEGACY GRANTS</h3>
+                </div>
+                <p class="utility-description">Community-led funding. We don't extract; we bootstrap local growth.</p>
+            </div>
+            
+            <div class="utility-card">
+                <div class="utility-header">
+                    <span class="u-icon">🎨</span> 
+                    <h3 class="utility-heading">DAO GOVERNANCE</h3>
+                </div>
+                <p class="utility-description">Your NFT is your vote. Weighted power for the true guardians of the land.</p>
+            </div>
+            
+            <div class="utility-card">
+                <div class="utility-header">
+                    <span class="u-icon">📡</span> 
+                    <h3 class="utility-heading">REAL-TIME DATA</h3>
+                </div>
+                <p class="utility-description">Full transparency. Track restoration efforts directly on-chain.</p>
             </div>
         </div>
-        <div class="hero-image">
-            <img src="Tomp1.png" alt="Tompolo Coin">
-        </div>
-    </section>
+    </div>
+</section>
 
-    <script>
-        function toggleMenu() {
-            const menu = document.getElementById("side-menu");
-            if (menu.style.width === "90%") {
-                menu.style.width = "0";
-                menu.style.opacity = "0";
-            } else {
-                menu.style.width = "90%";
-                menu.style.opacity = "1";
-            }
+<style>
+    #tpl-roadmap {
+        padding: 40px 0 100px 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        background: transparent;
+    }
+
+    #tpl-roadmap .section-container {
+        width: 90%;
+        max-width: 1200px;
+        position: relative;
+    }
+
+    /* MOBILE VIEW: Your favorite clean list */
+    .roadmap-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .orbit-phase {
+        background: rgba(15, 15, 17, 0.9);
+        padding: 20px;
+        border-radius: 15px;
+        border-left: 3px solid #b38b4d;
+    }
+
+    /* WINDOWS VIEW: THE "CATCHY" ORBIT */
+    @media screen and (min-width: 1024px) {
+        .roadmap-wrapper {
+            height: 700px; /* Gives space for the orbit */
+            display: block;
+            position: relative;
         }
-    </script>
+
+        /* The Central Hub (Your Coin/Logo) */
+        .roadmap-wrapper::after {
+            content: "TPL";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            height: 150px;
+            background: #0a0a0b;
+            border: 2px solid #b38b4d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #b38b4d;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 40px;
+            box-shadow: 0 0 50px rgba(179, 139, 77, 0.3);
+            z-index: 10;
+        }
+
+        .orbit-phase {
+            position: absolute;
+            width: 280px;
+            border-left: none;
+            border: 1px solid rgba(179, 139, 77, 0.2);
+            text-align: center;
+            transition: 0.5s ease;
+        }
+
+        /* Positioning the phases in a circle around the center */
+        .p-1 { top: 10%; left: 50%; transform: translateX(-50%); }
+        .p-2 { top: 35%; right: 5%; }
+        .p-3 { bottom: 10%; right: 20%; }
+        .p-4 { bottom: 10%; left: 20%; }
+        .p-5 { top: 35%; left: 5%; }
+
+        .orbit-phase:hover {
+            transform: scale(1.1);
+            border-color: #b38b4d;
+            box-shadow: 0 0 30px rgba(179, 139, 77, 0.2);
+            z-index: 20;
+        }
+    }
+
+    .phase-title {
+        color: #ffffff;
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 22px;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .phase-text {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 13px;
+        line-height: 1.4;
+    }
+</style>
+
+<section id="tpl-roadmap">
+    <div class="section-container">
+        <div class="utility-label" style="color:#fff; display:flex; align-items:center; gap:10px; margin-bottom:40px; font-family:'Inter'; font-weight:bold; letter-spacing:2px;">
+            <span style="width:4px; height:16px; background:#b38b4d; display:inline-block;"></span> ROADMAP REVOLUTION
+        </div>
+
+        <div class="roadmap-wrapper">
+            <div class="orbit-phase p-1">
+                <span class="phase-title">PHASE 1: GENESIS</span>
+                <p class="phase-text">Token launch, community building, and smart contract deployment.</p>
+            </div>
+            <div class="orbit-phase p-2">
+                <span class="phase-title">PHASE 2: GROWTH</span>
+                <p class="phase-text">DEX/CEX listings and the launch of Stake-to-Earn.</p>
+            </div>
+            <div class="orbit-phase p-3">
+                <span class="phase-title">PHASE 3: POWER</span>
+                <p class="phase-text">Partnership with Tantita Security and Governance Portal.</p>
+            </div>
+            <div class="orbit-phase p-4">
+                <span class="phase-title">PHASE 4: REACH</span>
+                <p class="phase-text">Global marketing and advanced NFT utility expansion.</p>
+            </div>
+            <div class="orbit-phase p-5">
+                <span class="phase-title">PHASE 5: DOMINANCE</span>
+                <p class="phase-text">Mass adoption and long-term sustainability plan 2.0.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script src="script.js"></script>
+
 </body>
-</html>
+    </html>
