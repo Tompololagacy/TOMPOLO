@@ -50,7 +50,7 @@
     .label-group { display: flex; align-items: center; gap: 12px; margin-bottom: 30px; color: #fff; font-family: 'Inter'; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; }
     
     /* ROADMAP LOG STYLE */
-    .log-container { position: relative; padding-left: 30px; } 
+    .log-container { position: relative; padding-left: 30px; }
     .log-line { position: absolute; left: 0; top: 0; width: 2px; height: 100%; background: linear-gradient(to bottom, #b38b4d, rgba(179, 139, 77, 0.1)); }
     .log-entry { margin-bottom: 40px; position: relative; }
     .log-dot { position: absolute; left: -36px; top: 5px; width: 12px; height: 12px; background: #0a0a0b; border: 2px solid #b38b4d; border-radius: 50%; }
@@ -73,16 +73,144 @@
     </div>
 </nav>
 
+<style>
+    /* MASTER HERO WRAPPER */
+    .hero-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding-top: 100px;
+        background: transparent;
+    }
+
+    /* THE BOX THAT MATCHES YOUR MANIFESTO */
+    .hero-wrapper .section-container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+        border-bottom: 2px solid #b38b4d; /* The Gold Baseline */
+        padding-bottom: 60px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .hero-title {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 48px;
+        line-height: 1.1;
+        color: #ffffff;
+        margin-bottom: 30px;
+        max-width: 800px;
+        text-transform: uppercase;
+    }
+
+    .hero-buttons {
+        display: flex;
+        gap: 15px;
+    }
+
+    /* PRIMARY BUTTON STYLES */
+    .btn-primary {
+        background: #b38b4d;
+        color: #000;
+        padding: 12px 24px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .btn-secondary {
+        border: 1px solid #b38b4d;
+        color: #b38b4d;
+        padding: 12px 24px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+</style>
+
 <section class="hero-wrapper">
     <div class="section-container"> 
-        <div class="brand-eyebrow">TOMPOLO LEGACY</div>
-        <h1 class="hero-title">From struggle to stewardship. <br>Protecting the land, people, and future.</h1>
+        <div style="color: rgba(255, 255, 255, 0.4); font-size: 12px; letter-spacing: 3px; margin-bottom: 10px;">TOMPOLO LEGACY</div>
+        <h1 class="hero-title">From struggle to stewardship. <br> Protecting the land, people, and future.</h1>
+        
         <div class="hero-buttons">
             <a href="#" class="btn-primary">JOIN THE LEGACY</a>
             <a href="#" class="btn-secondary">WHITEPAPER</a>
         </div>
     </div>
 </section>
+
+<style>
+    /* SLIM UTILITY BAR: Sits between Nav and Hero */
+    .utility-bar {
+        width: 100%;
+        background: rgba(179, 139, 77, 0.03);
+        border-bottom: 1px solid rgba(179, 139, 77, 0.1);
+        padding: 10px 0;
+    }
+
+    .utility-container {
+        max-width: 1200px;
+        width: 90%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* THE CATCHY ELEMENTS */
+    .ca-pill {
+        background: #000;
+        border: 1px dashed #b38b4d;
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-family: monospace;
+        font-size: 12px;
+        color: #fff;
+        display: flex;
+        gap: 8px;
+    }
+
+    .buy-link {
+        color: #b38b4d;
+        font-family: 'Bebas Neue';
+        text-decoration: none;
+        font-size: 14px;
+        letter-spacing: 1px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    /* MOBILE: Stack them if screen is small */
+    @media (max-width: 768px) {
+        .utility-container {
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+</style>
+
+<div class="utility-bar">
+    <div class="utility-container">
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <span style="color: #b38b4d; font-size: 10px; font-weight: bold; letter-spacing: 1px;">STATUS: PENDING</span>
+            <div class="ca-pill">
+                <span style="color: #b38b4d;">CA:</span>
+                <span style="filter: blur(4px);">0x7291...3791</span>
+            </div>
+        </div>
+
+        <a href="#" class="buy-link">
+            🛒 BUY $TPL (COMING SOON)
+        </a>
+    </div>
+</div>
+
 
 <style>
     /* UPDATED ABOUT SECTION CSS */
@@ -160,88 +288,6 @@
     </div>
 </section>
 
-
-<style>
-    /* MASTER SHELL: Maintains the 15px gap and 1200px width */
-    .dashboard-shell {
-        background: rgba(10, 10, 11, 0.9);
-        border: 1px solid rgba(179, 139, 77, 0.25);
-        border-radius: 24px;
-        padding: 40px;
-        width: 90% !important;
-        max-width: 1200px !important;
-        margin: 15px auto !important;
-        overflow: hidden;
-    }
-
-    /* THE RIBBON: Mobile Stack / Laptop Horizontal */
-    .utility-ribbon {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    @media screen and (min-width: 1024px) {
-        .utility-ribbon {
-            flex-direction: row !important; /* Forces cards side-by-side */
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-    }
-
-    /* THE MINI-DASH CARDS */
-    .dash-card {
-        background: rgba(15, 15, 17, 0.8);
-        border: 1px solid rgba(179, 139, 77, 0.1);
-        border-radius: 16px;
-        padding: 25px;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        position: relative;
-    }
-
-    @media screen and (min-width: 1024px) {
-        .dash-card {
-            width: calc(33% - 20px); /* 3 cards per row on laptop */
-            min-height: 180px;
-        }
-    }
-
-    /* Catchy Meme Effect: Gold Scan-line */
-    .dash-card::after {
-        content: '';
-        position: absolute;
-        top: 0; left: -100%;
-        width: 50%; height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(179, 139, 77, 0.05), transparent);
-        transition: 0.5s;
-    }
-
-    .dash-card:hover::after {
-        left: 100%;
-    }
-
-    .dash-card:hover {
-        transform: scale(1.03);
-        border-color: #b38b4d;
-        box-shadow: 0 0 20px rgba(179, 139, 77, 0.15);
-    }
-
-    .dash-title {
-        color: #b38b4d;
-        font-family: 'Bebas Neue';
-        font-size: 20px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 12px;
-    }
-
-    .dash-text {
-        color: rgba(255, 255, 255, 0.6);
-        font-size: 13px;
-        line-height: 1.5;
-    }
-</style>
 
 <style>
     /* MASTER SHELL: Maintains the 15px rhythm */
@@ -398,9 +444,17 @@
                 <div style="color:rgba(255,255,255,0.5); font-size:13px; line-height:1.5;">Interest-free grants and empowerment for small businesses within the ecosystem based on your holder rank.</div>
             </div>
 
+            <div class="u-card" style="opacity: 0.8; border-left: 3px solid rgba(179, 139, 77, 0.4);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                    <div style="color:#fff; font-family:'Bebas Neue'; font-size:20px;">🎨 NFT GOVERNANCE</div>
+                    <span style="background: rgba(179, 139, 77, 0.2); color: #b38b4d; font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: bold; letter-spacing: 1px;">MINTING SOON</span>
+                </div>
+                <div style="color:rgba(255,255,255,0.5); font-size:13px; line-height:1.5;">The signature of the legacy. Holders gain weighted power in the DAO and priority access to the Gold Launchpad.</div>
+            </div>
+
             <div class="u-card">
-                <div style="color:#fff; font-family:'Bebas Neue'; font-size:20px; margin-bottom:5px;">🎨 GOVERNANCE POWER</div>
-                <div style="color:rgba(255,255,255,0.5); font-size:13px; line-height:1.5;">Use your weighted voting power to choose which community projects receive direct legacy funding.</div>
+                <div style="color:#fff; font-family:'Bebas Neue'; font-size:20px; margin-bottom:5px;">⚖️ DAO GOVERNANCE</div>
+                <div style="color:rgba(255,255,255,0.5); font-size:13px; line-height:1.6;">Use your weighted voting power to choose which community projects receive direct legacy funding.</div>
             </div>
         </div>
 
@@ -419,7 +473,7 @@
     </div>
 </section>
 
-    
+
 <section id="roadmap">
     <div class="universal-shell">
         <div class="label-group"><span class="gold-accent"></span> STRATEGIC ROADMAP</div>
@@ -435,3 +489,4 @@
 <script src="script.js"></script>
 </body>
 </html>
+
