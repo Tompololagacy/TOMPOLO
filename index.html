@@ -161,19 +161,119 @@
 </section>
 
 
+<style>
+    /* MASTER SHELL: Maintains the 15px gap and 1200px width */
+    .dashboard-shell {
+        background: rgba(10, 10, 11, 0.9);
+        border: 1px solid rgba(179, 139, 77, 0.25);
+        border-radius: 24px;
+        padding: 40px;
+        width: 90% !important;
+        max-width: 1200px !important;
+        margin: 15px auto !important;
+        overflow: hidden;
+    }
+
+    /* THE RIBBON: Mobile Stack / Laptop Horizontal */
+    .utility-ribbon {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    @media screen and (min-width: 1024px) {
+        .utility-ribbon {
+            flex-direction: row !important; /* Forces cards side-by-side */
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    }
+
+    /* THE MINI-DASH CARDS */
+    .dash-card {
+        background: rgba(15, 15, 17, 0.8);
+        border: 1px solid rgba(179, 139, 77, 0.1);
+        border-radius: 16px;
+        padding: 25px;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+    }
+
+    @media screen and (min-width: 1024px) {
+        .dash-card {
+            width: calc(33% - 20px); /* 3 cards per row on laptop */
+            min-height: 180px;
+        }
+    }
+
+    /* Catchy Meme Effect: Gold Scan-line */
+    .dash-card::after {
+        content: '';
+        position: absolute;
+        top: 0; left: -100%;
+        width: 50%; height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(179, 139, 77, 0.05), transparent);
+        transition: 0.5s;
+    }
+
+    .dash-card:hover::after {
+        left: 100%;
+    }
+
+    .dash-card:hover {
+        transform: scale(1.03);
+        border-color: #b38b4d;
+        box-shadow: 0 0 20px rgba(179, 139, 77, 0.15);
+    }
+
+    .dash-title {
+        color: #b38b4d;
+        font-family: 'Bebas Neue';
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 12px;
+    }
+
+    .dash-text {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 13px;
+        line-height: 1.5;
+    }
+</style>
+
 <section id="tpl-utility">
-    <div class="universal-shell">
-        <div class="label-group"><span class="gold-accent"></span> $TPL UTILITIES</div>
-        <div class="utility-list utility-grid">
-            <div class="utility-card"><h3 style="color:#fff; font-family:'Bebas Neue'; font-size:22px; margin:0;">🔒 STAKE & PROTECT</h3><p style="color:rgba(255,255,255,0.6); font-size:14px; margin-top:10px;">Lock your legacy. Earn yield and "Steward Points" for exclusive drops.</p></div>
-            <div class="utility-card"><h3 style="color:#fff; font-family:'Bebas Neue'; font-size:22px; margin:0;">🏢 LEGACY GRANTS</h3><p style="color:rgba(255,255,255,0.6); font-size:14px; margin-top:10px;">Community-led funding. We bootstrap local growth through voting.</p></div>
-            <div class="utility-card"><h3 style="color:#fff; font-family:'Bebas Neue'; font-size:22px; margin:0;">🎨 DAO GOVERNANCE</h3><p style="color:rgba(255,255,255,0.6); font-size:14px; margin-top:10px;">Your NFT is your vote. Weighted power for the true guardians.</p></div>
-            <div class="utility-card"><h3 style="color:#fff; font-family:'Bebas Neue'; font-size:22px; margin:0;">📡 REAL-TIME DATA</h3><p style="color:rgba(255,255,255,0.6); font-size:14px; margin-top:10px;">Full transparency. Track restoration efforts directly on-chain.</p></div>
-            <div class="utility-card"><h3 style="color:#fff; font-family:'Bebas Neue'; font-size:22px; margin:0;">🚀 GOLD LAUNCHPAD</h3><p style="color:rgba(255,255,255,0.6); font-size:14px; margin-top:10px;">Guaranteed whitelist access to every new project joining the legacy.</p></div>
+    <div class="dashboard-shell">
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:35px; color:#fff; font-family:'Inter'; font-weight:bold; letter-spacing:2px; text-transform:uppercase;">
+            <span style="width:4px; height:18px; background:#b38b4d;"></span> $TPL DASHBOARD
         </div>
-        
+
+        <div class="utility-ribbon">
+            <div class="dash-card">
+                <div class="dash-title">🔒 STAKING</div>
+                <p class="dash-text">Lock $TPL to secure the network and earn "Steward Points" for exclusive airdrops.</p>
+            </div>
+            <div class="dash-card">
+                <div class="dash-title">🏢 GRANTS</div>
+                <p class="dash-text">Direct funding for Niger Delta growth. You vote on which projects get bootstrapped.</p>
+            </div>
+            <div class="dash-card">
+                <div class="dash-title">🎨 GOVERNANCE</div>
+                <p class="dash-text">Your NFT is your signature. Participate in the first on-chain Niger Delta DAO.</p>
+            </div>
+            <div class="dash-card">
+                <div class="dash-title">📡 DATA</div>
+                <p class="dash-text">Oracle-verified data tracking real-world restoration efforts in real-time.</p>
+            </div>
+            <div class="dash-card">
+                <div class="dash-title">🚀 LAUNCHPAD</div>
+                <p class="dash-text">Guaranteed whitelist for every ecosystem project. The Gold Standard launchpad.</p>
+            </div>
+        </div>
     </div>
 </section>
+
 
 <section id="roadmap">
     <div class="universal-shell">
