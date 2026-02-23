@@ -471,17 +471,18 @@
 <div class="about-container-fixed" style="background: transparent; border: none; box-shadow: none; padding: 0;">
 
     <section id="utility-section" style="
-        background: rgba(10, 10, 11, 0.9); 
-        backdrop-filter: blur(12px); 
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(179, 139, 77, 0.25); 
-        border-radius: 20px; 
-        padding: 45px 35px; 
-        width: 100%; 
-        box-sizing: border-box; 
-        overflow: hidden; 
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    ">
+    background: rgba(10, 10, 11, 0.9); 
+    backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(179, 139, 77, 0.25); 
+    border-radius: 20px; 
+    /* THIS PADDING LOCKS THE CONTENT IN THE CENTER */
+    padding: 45px calc((100% - 1100px) / 2 + 35px); 
+    width: 100%; 
+    box-sizing: border-box; 
+    overflow: hidden; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+">
         <div style="text-align: left; margin-bottom: 45px; max-width: 1200px;">
             <p style="color: rgba(179, 139, 77, 0.6); font-size: 10px; letter-spacing: 4px; text-transform: uppercase; margin: 0; font-weight: bold;">Ecosystem Power & Governance</p>
             <h2 style="font-family: 'Bebas Neue'; font-size: 42px; color: #fff; margin: 8px 0; letter-spacing: 1px;">PROJECT UTILITY</h2>
