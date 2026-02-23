@@ -35,45 +35,43 @@ body::before {
     -webkit-backdrop-filter: blur(12px) !important;
     border: 1px solid rgba(179, 139, 77, 0.25) !important; /* Syncs border weight */
 }
-/* 1. THE BUTTON LOOK */
+/* THE BUTTON LOOK */
 .buy-tpl-btn {
-    background-color: #ffcc00 !important; /* The yellow from your screenshot */
+    background-color: #ffcc00 !important;
     color: #000 !important;
-    padding: 10px 20px;
-    border-radius: 25px;
+    padding: 8px 18px;
+    border-radius: 20px;
     font-family: 'Bebas Neue', sans-serif;
     font-weight: bold;
     text-decoration: none;
-    transition: transform 0.2s;
     display: inline-block;
+    border: none;
+    transition: 0.2s;
 }
 
-.buy-tpl-btn:hover {
-    transform: scale(1.05);
-}
-
-/* 2. LAPTOP VIEW (In the corner) */
+/* LAPTOP VIEW - Keeps it in the top row */
 @media (min-width: 851px) {
     .nav-links {
-        display: flex;
+        display: flex !important;
         align-items: center;
+        gap: 25px; /* Adjusts space between links */
     }
-    .nav-buy-wrapper {
-        margin-left: 30px; /* Pushes it to the far corner of the nav area */
+    .buy-tpl-btn {
+        margin-left: 15px; /* Extra space after Tokenomics */
     }
 }
 
-/* 3. MOBILE VIEW (Inside the dropdown) */
+/* MOBILE VIEW - Centers it under the vertical list */
 @media (max-width: 850px) {
-    .nav-buy-wrapper {
-        margin-top: 20px;
-        padding: 0 25px; /* Matches your safety gap */
-        width: 100%;
-        box-sizing: border-box;
+    .nav-links {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 20px; /* Space between vertical links */
     }
     .buy-tpl-btn {
-        display: block; /* Makes it a full-width button in the menu */
+        width: 80%; /* Makes it a big button in the mobile menu */
         text-align: center;
-        font-size: 20px;
+        margin-top: 10px;
     }
 }
