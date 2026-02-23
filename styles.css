@@ -1,0 +1,84 @@
+/* SUBTLE DARK GOLD GLOW FOR 
+    /* MOBILE VIEW ADJUSTMENTS */
+ /* MOBILE VIEW ADJUSTMENTS */
+
+
+.dark-gold-glow {
+    box-shadow: 0 0 20px rgba(179, 139, 77, 0.4); /* Uses your tan/gold color */
+    border: 1px solid rgba(179, 139, 77, 0.3);
+    transition: 0.5s ease-in-out;
+}
+
+/* Optional: Slight increase in glow when hovering */
+.dark-gold-glow:hover {
+    box-shadow: 0 0 30px rgba(179, 139, 77, 0.6);
+    border: 1px solid rgba(179, 139, 77, 0.5);
+}
+
+
+/* THE GOLD RADIANCE ANIMATION */
+@keyframes goldGlowPulse {
+    0% { 
+        border-color: #ffcc00; 
+        box-shadow: 0 0 5px rgba(255, 204, 0, 0.2); 
+    }
+    50% { 
+        border-color: #fff; /* The "Shine" moment */
+        box-shadow: 0 0 20px rgba(255, 204, 0, 0.6); 
+    }
+    100% { 
+        border-color: #ffcc00; 
+        box-shadow: 0 0 5px rgba(255, 204, 0, 0.2); 
+    }
+}
+
+.shiny-fortress-box {
+    background: linear-gradient(145deg, #1a1a1a, #0d0d0d) !important;
+    border: 2px solid #ffcc00 !important;
+    animation: goldGlowPulse 3s infinite ease-in-out; /* Makes it pulse slowly */
+    transition: 0.3s;
+}
+
+.shiny-fortress-box:hover {
+    box-shadow: 0 0 30px rgba(255, 204, 0, 0.8) !important;
+    transform: scale(1.01); /* Slight lift on laptop */
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    /* This is the exact deep-dark background from your first image */
+    background-color: #05070a; 
+    min-height: 100vh;
+    font-family: 'Bebas Neue', sans-serif;
+    overflow-x: hidden;
+    color: #ffffff;
+    font-family: 'Inter', -apple-system, sans-serif; /* Clean professional font */
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Darker overlay to make the image blend into the deep background */
+    background: linear-gradient(rgba(5, 7, 10, 0.9), rgba(5, 7, 10, 0.95)),
+                url("Backgroundtom.jpg") no-repeat center center;
+    background-size: cover;
+    filter: blur(10px);
+    z-index: -1;
+    transform: scale(1.1);
+}
+
+/* SYNC ALL CONTAINERS TO MATCH MANIFESTO TRANSPARENCY */
+#utility-section .utility-main-container,
+#roadmap-section .roadmap-main-container,
+#tokenomics-section .token-main-container {
+    background: rgba(10, 10, 11, 0.9) !important; /* Matches Manifesto transparency */
+    backdrop-filter: blur(12px) !important;       /* Adds the premium faint blur */
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(179, 139, 77, 0.25) !important; /* Syncs border weight */
+}
