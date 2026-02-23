@@ -484,11 +484,11 @@
     overflow: hidden; 
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 ">
-        <div style="text-align: left; margin-bottom: 45px; max-width: 1200px;">
-            <p style="color: rgba(179, 139, 77, 0.6); font-size: 10px; letter-spacing: 4px; text-transform: uppercase; margin: 0; font-weight: bold;">Ecosystem Power & Governance</p>
-            <h2 style="font-family: 'Bebas Neue'; font-size: 42px; color: #fff; margin: 8px 0; letter-spacing: 1px;">PROJECT UTILITY</h2>
-            <div style="width: 100%; height: 2px; background: #b38b4d; margin-top: 15px; max-width: 320px;"></div>
-        </div>
+        <div style="text-align: left; margin-bottom: 45px;">
+    <p style="color: rgba(179, 139, 77, 0.6); font-size: 10px; letter-spacing: 4px; text-transform: uppercase; margin: 0; font-weight: bold;">Ecosystem Power & Governance</p>
+    <h2 style="font-family: 'Bebas Neue'; font-size: 42px; color: #fff; margin: 8px 0; letter-spacing: 1px;">PROJECT UTILITY</h2>
+    <div style="width: 100%; height: 2px; background: #b38b4d; margin-top: 15px; max-width: 320px;"></div>
+</div>
 
 
         <div class="utility-grid-final" style="max-width: 1100px; margin: 0 auto; display: grid;">
@@ -559,9 +559,16 @@
     /* MOBILE: PULL IN TO MATCH MANIFESTO */
     @media (max-width: 850px) { 
         .utility-grid-final { grid-template-columns: 1fr; gap: 45px; padding-left: 20px !important; padding-right: 20px !important; box-sizing: border-box !important; } 
-        #utility-section > div:fifrst-child { padding-left: 20px !important; padding-right: 20px !important; box-sizing: border-box !important;}
-        .util-item, .nft-gov-slot-styled {width:100% !important; box-sizing: border-box !important;
-        /* This 90% ensures it matches the Manifesto's side-gaps on mobile */
+         #utility-section {
+        padding-left: 25px !important;
+        padding-right: 25px !important;
+    }
+
+    /* Ensures the header line and text don't ignore the padding */
+    #utility-section > div {
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
         div[style*="max-width: 1200px"] { width: 90% !important; } 
     }
 </style>
