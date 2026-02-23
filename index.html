@@ -467,8 +467,75 @@
     </div>
 </section>
 
-    <div>
-        
+
+<section id="why-tompolo-section" style="width: 100%; display: flex; justify-content: center; margin: 15px 0;">
+    <div class="why-fortress-wrapper" style="
+        background: #080809; 
+        border: 1px solid rgba(179, 139, 77, 0.25);
+        border-radius: 16px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+        overflow: hidden;
+        display: flex;
+        flex-direction: row; /* Laptop: Text Left, Image Right */
+        align-items: stretch;
+        width: 90% !important;
+        max-width: 1200px !important;
+        box-sizing: border-box !important;">
+
+        <div class="why-text-column" style="flex: 1.2; padding: 50px; box-sizing: border-box;">
+            <div style="color: rgba(255, 255, 255, 0.35); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; font-weight: bold;">STRATEGIC VISION</div>
+            <h2 style="color: #ffffff; font-family: 'Bebas Neue', sans-serif; font-size: 42px; margin-bottom: 25px; line-height: 1;">WHY TOMPOLOCOIN?</h2>
+            
+            <div style="margin-bottom: 25px;">
+                <h4 style="color: #ffcc00; font-family: 'Bebas Neue'; font-size: 20px; margin-bottom: 5px;">THE FIRST MOVER ADVANTAGE</h4>
+                <p style="color: rgba(255, 255, 255, 0.75); font-size: 15px; line-height: 1.6;">We don't follow trends; we set them. Tompolo is for those who refuse to wait for permission.</p>
+            </div>
+
+            <div style="margin-bottom: 25px;">
+                <h4 style="color: #ffcc00; font-family: 'Bebas Neue'; font-size: 20px; margin-bottom: 5px;">MANUFACTURED VOLUME</h4>
+                <p style="color: rgba(255, 255, 255, 0.75); font-size: 15px; line-height: 1.6;">Our advanced arbitrage and multi-asset pools ensure constant activity. We manufacture the volume others wait for.</p>
+            </div>
+
+            <div>
+                <h4 style="color: #ffcc00; font-family: 'Bebas Neue'; font-size: 20px; margin-bottom: 5px;">UNSHAKABLE CONVICTION</h4>
+                <p style="color: rgba(255, 255, 255, 0.75); font-size: 15px; line-height: 1.6;">While others chase ghosts, we build a fortress of liquidity and community.</p>
+            </div>
+        </div>
+
+        <div class="why-img-column" style="flex: 1; display: flex;">
+            <img src="Logo1.png" alt="Tompolo Strategy" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        </div>
+
+    </div>
+
+    <style>
+        /* MOBILE VIEW ADJUSTMENTS */
+        @media (max-width: 900px) {
+            .why-fortress-wrapper {
+                /* 'column-reverse' flips the stack so the image (the 2nd div) goes to the TOP */
+                flex-direction: column-reverse !important; 
+                margin: 15px auto !important;
+            }
+            .why-img-column {
+                width: 100% !important;
+                aspect-ratio: 1 / 1 !important; /* Perfect Rounded Square */
+            }
+            .why-img-column img {
+                border-radius: 0 !important;
+            }
+            .why-text-column {
+                width: 100% !important;
+                padding: 30px 20px !important;
+                text-align: left !important;
+            }
+            .why-text-column h2 {
+                font-size: 32px !important;
+            }
+        }
+    </style>
+</section>
+    
+    
 <div style="max-width: 1200px; width: 90%; margin: 40px auto; box-sizing: border-box; padding: 0; display: block; clear: both;">
 
     <section id="utility-section" style="
