@@ -35,3 +35,45 @@ body::before {
     -webkit-backdrop-filter: blur(12px) !important;
     border: 1px solid rgba(179, 139, 77, 0.25) !important; /* Syncs border weight */
 }
+/* 1. THE BUTTON LOOK */
+.buy-tpl-btn {
+    background-color: #ffcc00 !important; /* The yellow from your screenshot */
+    color: #000 !important;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+    transition: transform 0.2s;
+    display: inline-block;
+}
+
+.buy-tpl-btn:hover {
+    transform: scale(1.05);
+}
+
+/* 2. LAPTOP VIEW (In the corner) */
+@media (min-width: 851px) {
+    .nav-links {
+        display: flex;
+        align-items: center;
+    }
+    .nav-buy-wrapper {
+        margin-left: 30px; /* Pushes it to the far corner of the nav area */
+    }
+}
+
+/* 3. MOBILE VIEW (Inside the dropdown) */
+@media (max-width: 850px) {
+    .nav-buy-wrapper {
+        margin-top: 20px;
+        padding: 0 25px; /* Matches your safety gap */
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .buy-tpl-btn {
+        display: block; /* Makes it a full-width button in the menu */
+        text-align: center;
+        font-size: 20px;
+    }
+}
