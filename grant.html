@@ -9,6 +9,7 @@
 
     <style>
         html, body { background-color: #050505 !important; margin: 0; padding: 0; color: white; font-family: 'Inter', sans-serif; }
+        
         .gate-shell {
             background: rgba(10, 10, 11, 0.95);
             backdrop-filter: blur(12px);
@@ -17,11 +18,13 @@
             padding: 40px;
             width: 90% !important;
             max-width: 1200px;
-            margin: 10px auto !important; /* THE TIGHT 10PX MARGIN */
+            margin: 10px auto !important;
             box-sizing: border-box;
             text-align: center;
         }
+
         .status-msg { margin: 20px 0; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; color: #ffcc00; font-size: 14px; }
+
         .btn-legacy-connect {
             background: #ffffff !important;
             color: #000 !important;
@@ -35,10 +38,29 @@
             font-size: 18px;
             border: none;
             cursor: pointer;
-            transition: 0.3s;
         }
-        #grant-form-wrapper { display: none; margin-top: 30px; padding-top: 30px; border-top: 1px solid rgba(179, 139, 77, 0.2); }
-        .grant-input { width: 100%; max-width: 500px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(179, 139, 77, 0.3); color: white; padding: 15px; margin: 10px auto; display: block; border-radius: 5px; }
+
+        #grant-form-wrapper { 
+            display: none; 
+            margin-top: 30px; 
+            padding-top: 30px; 
+            border-top: 1px solid rgba(179, 139, 77, 0.2); 
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .grant-input {
+            width: 100%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(179, 139, 77, 0.3);
+            color: white;
+            padding: 15px;
+            margin: 10px auto;
+            display: block;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -54,7 +76,7 @@
             <form action="YOUR_GOOGLE_FORM_URL" method="POST">
                 <input type="text" class="grant-input" placeholder="Business Name" required>
                 <input type="text" class="grant-input" id="display-wallet" placeholder="Wallet Address" readonly>
-                <textarea class="grant-input" placeholder="Describe your project..." rows="4" required></textarea>
+                <textarea class="grant-input" placeholder="Describe your business mission..." rows="4" required></textarea>
                 <button type="submit" class="btn-legacy-connect" style="background: #b38b4d !important; color: #fff !important; width: 100%; max-width: 500px;">SUBMIT GRANT APPLICATION</button>
             </form>
         </div>
@@ -62,17 +84,17 @@
 
     <script>
         const USDC_MINT = "EPjFW36wd2WtNcqdwAa6zhdnxNDwj36H2E7iPEloZja1"; 
-        const MIN_USDC = 0.50;
+        const MIN_REQUIRED = 0.50;
 
         const connectBtn = document.getElementById('connect-btn');
         const statusMsg = document.getElementById('wallet-status');
         const formWrapper = document.getElementById('grant-form-wrapper');
         const walletInput = document.getElementById('display-wallet');
 
-        async function checkUSDC(address) {
-            statusMsg.innerText = "VERIFYING USDC HOLDINGS...";
+        async function verifyBalance(address) {
+            statusMsg.innerText = "CONNECTED. VERIFYING 0.5 USDC...";
             try {
-                // Using a high-speed RPC to avoid "Scanning" hang
+                // Using a more reliable RPC endpoint to prevent "Scanning" hang
                 const connection = new solanaWeb3.Connection("https://rpc.ankr.com/solana", "confirmed");
                 const accounts = await connection.getParsedTokenAccountsByOwner(
                     new solanaWeb3.PublicKey(address),
@@ -84,42 +106,42 @@
                     balance = accounts.value[0].account.data.parsed.info.tokenAmount.uiAmount || 0;
                 }
 
-                if (balance >= MIN_USDC) {
+                if (balance >= MIN_REQUIRED) {
                     statusMsg.style.color = "#00ff00";
-                    statusMsg.innerText = "SUCCESS: " + balance.toFixed(2) + " USDC FOUND";
+                    statusMsg.innerText = "ELIGIBLE: " + balance.toFixed(2) + " USDC FOUND";
                     walletInput.value = address;
                     formWrapper.style.display = "block";
                     connectBtn.style.display = "none";
                 } else {
                     statusMsg.style.color = "#ff4444";
-                    statusMsg.innerHTML = `NOT ELIGIBLE: ${balance.toFixed(2)} USDC <br> <a href="https://jup.ag/swap/SOL-USDC" target="_blank" style="color:#ffcc00; text-decoration:underline; font-size:12px;">BUY USDC TO PROCEED</a>`;
+                    statusMsg.innerHTML = `NOT ELIGIBLE: YOU HAVE ${balance.toFixed(2)} USDC.<br>0.5 USDC REQUIRED TO UNLOCK FORM.`;
                 }
             } catch (err) {
-                statusMsg.innerText = "BLOCKCHAIN TIMEOUT. TRYING AGAIN...";
-                setTimeout(() => checkUSDC(address), 1500);
+                statusMsg.innerText = "BLOCKCHAIN BUSY. RETRYING...";
+                setTimeout(() => verifyBalance(address), 1000);
             }
         }
 
         connectBtn.addEventListener('click', async () => {
             const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
             
-            // 1. Detect if the extension is available
+            // Check for Phantom/Solflare
             const provider = window?.solana?.isPhantom ? window.solana : (window?.solflare?.isSolflare ? window.solflare : null);
 
             if (provider) {
                 try {
-                    // This triggers the EXTENSION pop-up
+                    // THIS TRIGGERS THE ACTUAL NATIVE PHANTOM POP-UP
                     const resp = await provider.connect();
-                    checkUSDC(resp.publicKey.toString());
+                    // Once user clicks "Connect" in Phantom, we check balance
+                    verifyBalance(resp.publicKey.toString());
                 } catch (e) {
-                    statusMsg.innerText = "CONNECTION REJECTED";
+                    statusMsg.innerText = "CONNECTION REJECTED BY USER";
                 }
             } else if (isMobile) {
-                // This triggers the MOBILE APP redirect
                 const url = encodeURIComponent(window.location.href);
                 window.location.href = `https://phantom.app/ul/browse/${url}?ref=${encodeURIComponent(window.location.origin)}`;
             } else {
-                statusMsg.innerText = "PHANTOM EXTENSION NOT DETECTED";
+                statusMsg.innerText = "PHANTOM EXTENSION NOT FOUND";
                 window.open("https://phantom.app/", "_blank");
             }
         });
