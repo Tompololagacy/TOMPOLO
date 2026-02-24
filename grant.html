@@ -17,24 +17,15 @@
             padding: 40px;
             width: 90% !important;
             max-width: 1200px;
-            margin: 10px auto !important;
+            margin: 10px auto !important; /* THE TIGHT 10PX MARGIN */
             box-sizing: border-box;
             text-align: center;
         }
         .status-msg { margin: 20px 0; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; color: #ffcc00; font-size: 14px; }
         .btn-legacy-connect {
-            background: #ffffff !important;
-            color: #000 !important;
-            width: 240px; 
-            margin: 0 auto !important;
-            text-align: center;
-            display: block;
-            padding: 14px;
-            border-radius: 8px;
-            font-family: 'Bebas Neue';
-            font-size: 18px;
-            border: none;
-            cursor: pointer;
+            background: #ffffff !important; color: #000 !important; width: 240px; margin: 0 auto !important;
+            text-align: center; display: block; padding: 14px; border-radius: 8px; font-family: 'Bebas Neue';
+            font-size: 18px; border: none; cursor: pointer;
         }
         #grant-form-wrapper { display: none; margin-top: 30px; padding-top: 30px; border-top: 1px solid rgba(179, 139, 77, 0.2); }
         .grant-input { width: 100%; max-width: 500px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(179, 139, 77, 0.3); color: white; padding: 15px; margin: 10px auto; display: block; border-radius: 5px; }
@@ -68,49 +59,68 @@
         const formWrapper = document.getElementById('grant-form-wrapper');
         const walletInput = document.getElementById('display-wallet');
 
-        async function checkUSDC(address) {
-            statusMsg.innerText = "VERIFYING 0.5 USDC...";
-            try {
-                // Using the absolute most standard connection possible
-                const connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('mainnet-beta'), 'confirmed');
-                const accounts = await connection.getParsedTokenAccountsByOwner(
-                    new solanaWeb3.PublicKey(address),
-                    { mint: new solanaWeb3.PublicKey(USDC_MINT) }
-                );
+        async function verifyUSDC(address) {
+            statusMsg.innerText = "VERIFYING USDC...";
+            
+            // Try 3 different RPCs to avoid the "Scanning" hang
+            const endpoints = [
+                "https://rpc.ankr.com/solana",
+                "https://api.mainnet-beta.solana.com",
+                "https://solana-mainnet.g.allthatnode.com/full/evm"
+            ];
 
-                let balance = 0;
-                if (accounts.value.length > 0) {
-                    balance = accounts.value[0].account.data.parsed.info.tokenAmount.uiAmount || 0;
-                }
+            let success = false;
 
-                if (balance >= MIN_REQUIRED) {
-                    statusMsg.style.color = "#00ff00";
-                    statusMsg.innerText = "ELIGIBLE: " + balance.toFixed(2) + " USDC";
-                    walletInput.value = address;
-                    formWrapper.style.display = "block";
-                    connectBtn.style.display = "none";
-                } else {
-                    statusMsg.style.color = "#ff4444";
-                    statusMsg.innerText = "NOT ELIGIBLE: " + balance.toFixed(2) + " USDC FOUND. (0.5 REQUIRED)";
+            for (let url of endpoints) {
+                if (success) break;
+                try {
+                    const connection = new solanaWeb3.Connection(url, "confirmed");
+                    const accounts = await connection.getParsedTokenAccountsByOwner(
+                        new solanaWeb3.PublicKey(address),
+                        { mint: new solanaWeb3.PublicKey(USDC_MINT) }
+                    );
+
+                    let balance = 0;
+                    if (accounts.value.length > 0) {
+                        balance = accounts.value[0].account.data.parsed.info.tokenAmount.uiAmount || 0;
+                    }
+
+                    if (balance >= MIN_REQUIRED) {
+                        statusMsg.style.color = "#00ff00";
+                        statusMsg.innerText = "ELIGIBLE: " + balance.toFixed(2) + " USDC FOUND";
+                        walletInput.value = address;
+                        formWrapper.style.display = "block";
+                        connectBtn.style.display = "none";
+                        success = true;
+                    } else {
+                        statusMsg.style.color = "#ff4444";
+                        statusMsg.innerHTML = `NOT ELIGIBLE: ${balance.toFixed(2)} USDC FOUND.<br>0.5 USDC REQUIRED.`;
+                        success = true;
+                    }
+                } catch (err) {
+                    console.log("Endpoint failed, trying next...");
                 }
-            } catch (err) {
-                statusMsg.innerText = "SCANNING BLOCKCHAIN...";
-                setTimeout(() => checkUSDC(address), 1000);
+            }
+
+            if (!success) {
+                statusMsg.innerText = "NETWORK CONGESTED. RETRYING...";
+                setTimeout(() => verifyUSDC(address), 2000);
             }
         }
 
         connectBtn.addEventListener('click', async () => {
-            // THE DIRECT FIRST-VERSION METHOD
-            if (window.solana) {
+            const provider = window.solana || window.solflare;
+            if (provider) {
                 try {
-                    const resp = await window.solana.connect();
-                    checkUSDC(resp.publicKey.toString());
+                    const resp = await provider.connect();
+                    verifyUSDC(resp.publicKey.toString());
                 } catch (err) {
                     statusMsg.innerText = "CONNECTION REJECTED";
                 }
             } else {
-                statusMsg.innerText = "PHANTOM NOT FOUND";
-                window.open("https://phantom.app/", "_blank");
+                // If in Phantom App but doesn't detect window.solana immediately
+                statusMsg.innerText = "RE-ATTEMPTING CONNECTION...";
+                window.location.reload();
             }
         });
     </script>
