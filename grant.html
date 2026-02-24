@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
+
+<style>
+    .gate-container {
+        text-align: center;
+        padding: 40px;
+        background: rgba(15, 15, 17, 0.95);
+        border: 1px solid #b38b4d;
+        border-radius: 15px;
+        margin-top: 20px;
+    }
+
+    .status-msg {
+        margin: 20px 0;
+        font-family: 'Inter', sans-serif;
+        font-weight: bold;
+    }
+
+    /* HIDDEN BY DEFAULT */
+    #grant-form-wrapper {
+        display: none;
+        margin-top: 30px;
+        border-top: 1px dashed #b38b4d;
+        padding-top: 30px;
+        animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    input, textarea {
+        width: 100%;
+        background: #0a0a0b;
+        border: 1px solid rgba(179, 139, 77, 0.3);
+        color: white;
+        padding: 12px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+    }
+</style>
+
+<section class="universal-shell">
+    <div class="gate-container">
+        <h2 style="font-family: 'Bebas Neue'; font-size: 32px; color: #ffcc00;">BIZ SUPPORT VERIFICATION</h2>
+        <p style="color: rgba(255,255,255,0.7);">Only verified $TPL Stewards can apply for grants.</p>
+        
+        <div id="wallet-status" class="status-msg" style="color: #ffcc00;">Wallet Not Connected</div>
+        
+        <button id="connect-btn" class="btn-buy-shiny" style="width: 250px; margin: 0 auto; display: block; cursor:pointer;">
+            CONNECT PHANTOM
+        </button>
+
+        <div id="grant-form-wrapper">
+            <h3 style="font-family: 'Bebas Neue'; color: #fff;">GRANT APPLICATION UNLOCKED</h3>
+            <form id="legacy-grant-form">
+                <input type="text" placeholder="Business Name" required>
+                <input type="text" placeholder="Twitter/X Handle" required>
+                <textarea placeholder="Describe your business mission..." rows="4" required></textarea>
+                <button type="submit" class="btn-buy-shiny" style="width: 100%; background: #b38b4d !important;">SUBMIT APPLICATION</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+    const TPL_TOKEN_ADDRESS = "YOUR_TOKEN_MINT_ADDRESS_HERE"; // Put your actual token address here
+    const MIN_REQUIRED = 50000; // Change this to your desired minimum
+
+    const connectBtn = document.getElementById('connect-btn');
+    const statusMsg = document.getElementById('wallet-status');
+    const formWrapper = document.getElementById('grant-form-wrapper');
+
+    async function checkTokenBalance(walletAddress) {
+        statusMsg.innerText = "Checking $TPL Stewardship...";
+        
+        // This is where we talk to Solana
+        const connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('mainnet-beta'));
+        const publicKey = new solanaWeb3.PublicKey(walletAddress);
+        
+        try {
+            const tokenAccounts = await connection.getParsedTokenAccountsByOwner(publicKey, {
+                mint: new solanaWeb3.PublicKey(TPL_TOKEN_ADDRESS)
+            });
+
+            let balance = 0;
+            if (tokenAccounts.value.length > 0) {
+                balance = tokenAccounts.value[0].account.data.parsed.info.tokenAmount.uiAmount;
+            }
+
+            if (balance >= MIN_REQUIRED) {
+                statusMsg.style.color = "#00ff00";
+                statusMsg.innerText = "VERIFIED: " + balance.toLocaleString() + " $TPL FOUND";
+                formWrapper.style.display = "block";
+                connectBtn.style.display = "none";
+            } else {
+                statusMsg.style.color = "#ff4444";
+                statusMsg.innerText = "INSUFFICIENT BALANCE: You need " + MIN_REQUIRED.toLocaleString() + " $TPL.";
+            }
+        } catch (err) {
+            statusMsg.innerText = "Error checking balance. Try again.";
+            console.error(err);
+        }
+    }
+
+    connectBtn.addEventListener('click', async () => {
+        if (window.solana && window.solana.isPhantom) {
+            try {
+                const response = await window.solana.connect();
+                const walletAddress = response.publicKey.toString();
+                checkTokenBalance(walletAddress);
+            } catch (err) {
+                statusMsg.innerText = "Connection Cancelled";
+            }
+        } else {
+            statusMsg.innerText = "Please Install Phantom Wallet";
+            window.open("https://phantom.app/", "_blank");
+        }
+    });
+</script>
+
+</body>
+
+</html>
