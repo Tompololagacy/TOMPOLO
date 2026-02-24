@@ -1,179 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Tompolo Legacy | Grant Verification</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    
     <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
 
     <style>
-        body {
-            background: #050505;
-            margin: 0;
-            padding: 20px 0;
-            font-family: 'Inter', sans-serif;
-            color: white;
-        }
-
-        /* THE UNIVERSAL SHELL: Fixed 10px margins for the tight look */
+        html, body { background-color: #050505 !important; margin: 0; padding: 0; color: white; font-family: 'Inter', sans-serif; }
         .gate-shell {
-            background: rgba(10, 10, 11, 0.9);
+            background: rgba(10, 10, 11, 0.95);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(179, 139, 77, 0.25);
             border-radius: 20px;
             padding: 40px;
             width: 90% !important;
             max-width: 1200px;
-            margin: 10px auto !important; /* PERFECT TIGHT SPACING */
+            margin: 10px auto !important;
             box-sizing: border-box;
             text-align: center;
         }
-
-        .status-msg {
-            margin: 20px 0;
-            font-family: 'Inter', sans-serif;
-            font-weight: bold;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        /* CENTERED LEGACY BUTTON: Spaced 0 auto to never touch edges */
+        .status-msg { margin: 20px 0; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; color: #ffcc00; font-size: 14px; }
         .btn-legacy-connect {
-            background: #ffffff !important;
-            color: #000 !important;
-            text-decoration: none;
-            width: 240px; 
-            margin: 0 auto !important; /* PERFECTLY CENTERED */
-            text-align: center;
-            display: block;
-            padding: 14px;
-            border-radius: 8px;
-            font-family: 'Bebas Neue';
-            font-size: 18px;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s;
+            background: #ffffff !important; color: #000 !important; width: 240px; margin: 0 auto !important;
+            text-align: center; display: block; padding: 14px; border-radius: 8px; font-family: 'Bebas Neue';
+            font-size: 18px; border: none; cursor: pointer;
         }
-
-        .btn-legacy-connect:hover {
-            background: #ffcc00 !important;
-            transform: scale(1.05);
-        }
-
-        /* THE HIDDEN FORM */
-        #grant-form-wrapper {
-            display: none; 
-            margin-top: 30px;
-            padding-top: 30px;
-            border-top: 1px solid rgba(179, 139, 77, 0.2);
-            animation: fadeIn 0.6s ease forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .grant-input {
-            width: 100%;
-            max-width: 500px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(179, 139, 77, 0.3);
-            color: white;
-            padding: 15px;
-            margin: 10px auto;
-            display: block;
-            border-radius: 5px;
-        }
-
-        @media (max-width: 850px) {
-            .gate-shell { width: 95% !important; padding: 25px; }
-            .btn-legacy-connect { width: 100%; }
-        }
+        #grant-form-wrapper { display: none; margin-top: 30px; padding-top: 30px; border-top: 1px solid rgba(179, 139, 77, 0.2); }
+        .grant-input { width: 100%; max-width: 500px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(179, 139, 77, 0.3); color: white; padding: 15px; margin: 10px auto; display: block; border-radius: 5px; }
     </style>
 </head>
 <body>
 
-    <section class="gate-shell">
+    <div class="gate-shell">
         <p style="color: rgba(179, 139, 77, 0.6); font-size: 11px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 5px; font-weight: bold;">Security Protocol</p>
         <h2 style="font-family: 'Bebas Neue'; font-size: 40px; color: #fff; margin: 0 0 20px 0;">BIZ SUPPORT GATE</h2>
-        
-        <div id="wallet-status" class="status-msg" style="color: #ffcc00;">WALLET DISCONNECTED</div>
-        
+        <div id="wallet-status" class="status-msg">READY TO CONNECT</div>
         <button id="connect-btn" class="btn-legacy-connect">CONNECT WALLET</button>
 
         <div id="grant-form-wrapper">
-            <h3 style="font-family: 'Bebas Neue'; color: #00ff00; font-size: 24px; margin-bottom: 20px;">✓ STEWARD VERIFIED</h3>
-            
+            <h3 style="font-family: 'Bebas Neue'; color: #00ff00; font-size: 24px; margin-bottom: 20px;">✓ ELIGIBILITY VERIFIED</h3>
             <form action="YOUR_GOOGLE_FORM_URL" method="POST">
-                <input type="text" class="grant-input" placeholder="Legal/Business Name" required>
-                <input type="text" class="grant-input" placeholder="Solana Wallet Address" required>
-                <textarea class="grant-input" placeholder="Describe your project mission..." rows="4" required></textarea>
-                <button type="submit" class="btn-legacy-connect" style="background: #b38b4d !important; color: #fff !important; width: 100%; max-width: 500px;">SUBMIT GRANT REQUEST</button>
+                <input type="text" class="grant-input" placeholder="Business Name" required>
+                <input type="text" class="grant-input" id="display-wallet" placeholder="Wallet Address" readonly>
+                <textarea class="grant-input" placeholder="Describe your business mission..." rows="4" required></textarea>
+                <button type="submit" class="btn-legacy-connect" style="background: #b38b4d !important; color: #fff !important; width: 100%; max-width: 500px;">SUBMIT GRANT APPLICATION</button>
             </form>
         </div>
-    </section>
+    </div>
 
     <script>
-        // CONFIGURATION
-        const TPL_TOKEN_ADDRESS = "PASTE_YOUR_TOKEN_CA_HERE"; 
-        const MIN_REQUIRED = 50000; 
+        const USDC_MINT = "EPjFW36wd2WtNcqdwAa6zhdnxNDwj36H2E7iPEloZja1";
+        const MIN_REQUIRED = 0.50;
 
         const connectBtn = document.getElementById('connect-btn');
         const statusMsg = document.getElementById('wallet-status');
         const formWrapper = document.getElementById('grant-form-wrapper');
+        const walletInput = document.getElementById('display-wallet');
 
-        async function verifyStewardship(walletAddress) {
-            statusMsg.innerText = "SCANNING FOR $TPL...";
+        async function verifyBalance(address) {
+            statusMsg.innerText = "AUTHENTICATING...";
             
             try {
-                const connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('mainnet-beta'));
-                const publicKey = new solanaWeb3.PublicKey(walletAddress);
+                // Use a high-speed Explorer API instead of a standard node
+                const response = await fetch(`https://api.solana.fm/v0/accounts/${address}/tokens`);
+                const data = await response.json();
                 
-                const tokenAccounts = await connection.getParsedTokenAccountsByOwner(publicKey, {
-                    mint: new solanaWeb3.PublicKey(TPL_TOKEN_ADDRESS)
-                });
-
                 let balance = 0;
-                if (tokenAccounts.value.length > 0) {
-                    balance = tokenAccounts.value[0].account.data.parsed.info.tokenAmount.uiAmount;
+                
+                if (data.result && Array.isArray(data.result)) {
+                    const usdcToken = data.result.find(t => t.tokenHash === USDC_MINT);
+                    if (usdcToken) {
+                        balance = usdcToken.amount / Math.pow(10, usdcToken.decimals);
+                    }
                 }
 
                 if (balance >= MIN_REQUIRED) {
                     statusMsg.style.color = "#00ff00";
-                    statusMsg.innerText = "ACCESS GRANTED: " + balance.toLocaleString() + " $TPL FOUND";
+                    statusMsg.innerText = "VERIFIED: " + balance.toFixed(2) + " USDC FOUND";
+                    walletInput.value = address;
                     formWrapper.style.display = "block";
                     connectBtn.style.display = "none";
                 } else {
                     statusMsg.style.color = "#ff4444";
-                    statusMsg.innerHTML = `INSUFFICIENT $TPL <br> <a href="https://jup.ag/swap/SOL-${TPL_TOKEN_ADDRESS}" target="_blank" style="color:#ffcc00; text-decoration:underline; font-size:14px; display:block; margin-top:10px;">BUY MORE $TPL TO UNLOCK FORM</a>`;
+                    statusMsg.innerHTML = `NOT ELIGIBLE: ${balance.toFixed(2)} USDC FOUND.<br>0.50 USDC REQUIRED TO PROCEED.`;
                 }
             } catch (err) {
-                statusMsg.innerText = "SCAN ERROR. PLEASE REFRESH.";
+                // If the API fails, fall back to the standard node method
+                console.log("API failed, falling back to node...");
+                statusMsg.innerText = "NETWORK BUSY. RETRYING...";
+                setTimeout(() => verifyBalance(address), 1000);
             }
         }
 
         connectBtn.addEventListener('click', async () => {
-            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-            const isPhantom = window.solana && window.solana.isPhantom;
-            const isSolflare = window.solflare && window.solflare.isSolflare;
-
-            if (isPhantom || isSolflare) {
+            const provider = window.solana;
+            if (provider) {
                 try {
-                    const provider = isPhantom ? window.solana : window.solflare;
-                    const response = await provider.connect();
-                    verifyStewardship(response.publicKey.toString());
+                    const resp = await provider.connect();
+                    verifyBalance(resp.publicKey.toString());
                 } catch (err) {
-                    statusMsg.innerText = "CONNECTION CANCELLED";
+                    statusMsg.innerText = "CONNECTION REJECTED";
                 }
-            } else if (isMobile) {
-                // MOBILE DEEP LINK FIX: Opens site INSIDE Phantom Browser
-                const siteUrl = window.location.href.replace(/^https?:\/\//, '');
-                window.location.href = `https://phantom.app/ul/browse/https://${siteUrl}`;
             } else {
-                statusMsg.innerText = "OPEN IN PHANTOM/SOLFLARE BROWSER";
-                setTimeout(() => { window.open("https://phantom.app/download", "_blank"); }, 2000);
+                window.open("https://phantom.app/", "_blank");
             }
         });
     </script>
