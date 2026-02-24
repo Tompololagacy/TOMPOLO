@@ -9,7 +9,6 @@
 
     <style>
         html, body { background-color: #050505 !important; margin: 0; padding: 0; color: white; font-family: 'Inter', sans-serif; }
-        
         .gate-shell {
             background: rgba(10, 10, 11, 0.95);
             backdrop-filter: blur(12px);
@@ -22,9 +21,7 @@
             box-sizing: border-box;
             text-align: center;
         }
-
         .status-msg { margin: 20px 0; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; color: #ffcc00; font-size: 14px; }
-
         .btn-legacy-connect {
             background: #ffffff !important;
             color: #000 !important;
@@ -39,28 +36,8 @@
             border: none;
             cursor: pointer;
         }
-
-        #grant-form-wrapper { 
-            display: none; 
-            margin-top: 30px; 
-            padding-top: 30px; 
-            border-top: 1px solid rgba(179, 139, 77, 0.2); 
-            animation: fadeIn 0.6s ease forwards;
-        }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .grant-input {
-            width: 100%;
-            max-width: 500px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(179, 139, 77, 0.3);
-            color: white;
-            padding: 15px;
-            margin: 10px auto;
-            display: block;
-            border-radius: 5px;
-        }
+        #grant-form-wrapper { display: none; margin-top: 30px; padding-top: 30px; border-top: 1px solid rgba(179, 139, 77, 0.2); }
+        .grant-input { width: 100%; max-width: 500px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(179, 139, 77, 0.3); color: white; padding: 15px; margin: 10px auto; display: block; border-radius: 5px; }
     </style>
 </head>
 <body>
@@ -83,7 +60,7 @@
     </div>
 
     <script>
-        const USDC_MINT = "EPjFW36wd2WtNcqdwAa6zhdnxNDwj36H2E7iPEloZja1"; 
+        const USDC_MINT = "EPjFW36wd2WtNcqdwAa6zhdnxNDwj36H2E7iPEloZja1";
         const MIN_REQUIRED = 0.50;
 
         const connectBtn = document.getElementById('connect-btn');
@@ -91,11 +68,11 @@
         const formWrapper = document.getElementById('grant-form-wrapper');
         const walletInput = document.getElementById('display-wallet');
 
-        async function verifyBalance(address) {
-            statusMsg.innerText = "CONNECTED. VERIFYING 0.5 USDC...";
+        async function checkUSDC(address) {
+            statusMsg.innerText = "VERIFYING 0.5 USDC...";
             try {
-                // Using a more reliable RPC endpoint to prevent "Scanning" hang
-                const connection = new solanaWeb3.Connection("https://rpc.ankr.com/solana", "confirmed");
+                // Using the absolute most standard connection possible
+                const connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('mainnet-beta'), 'confirmed');
                 const accounts = await connection.getParsedTokenAccountsByOwner(
                     new solanaWeb3.PublicKey(address),
                     { mint: new solanaWeb3.PublicKey(USDC_MINT) }
@@ -108,40 +85,31 @@
 
                 if (balance >= MIN_REQUIRED) {
                     statusMsg.style.color = "#00ff00";
-                    statusMsg.innerText = "ELIGIBLE: " + balance.toFixed(2) + " USDC FOUND";
+                    statusMsg.innerText = "ELIGIBLE: " + balance.toFixed(2) + " USDC";
                     walletInput.value = address;
                     formWrapper.style.display = "block";
                     connectBtn.style.display = "none";
                 } else {
                     statusMsg.style.color = "#ff4444";
-                    statusMsg.innerHTML = `NOT ELIGIBLE: YOU HAVE ${balance.toFixed(2)} USDC.<br>0.5 USDC REQUIRED TO UNLOCK FORM.`;
+                    statusMsg.innerText = "NOT ELIGIBLE: " + balance.toFixed(2) + " USDC FOUND. (0.5 REQUIRED)";
                 }
             } catch (err) {
-                statusMsg.innerText = "BLOCKCHAIN BUSY. RETRYING...";
-                setTimeout(() => verifyBalance(address), 1000);
+                statusMsg.innerText = "SCANNING BLOCKCHAIN...";
+                setTimeout(() => checkUSDC(address), 1000);
             }
         }
 
         connectBtn.addEventListener('click', async () => {
-            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-            
-            // Check for Phantom/Solflare
-            const provider = window?.solana?.isPhantom ? window.solana : (window?.solflare?.isSolflare ? window.solflare : null);
-
-            if (provider) {
+            // THE DIRECT FIRST-VERSION METHOD
+            if (window.solana) {
                 try {
-                    // THIS TRIGGERS THE ACTUAL NATIVE PHANTOM POP-UP
-                    const resp = await provider.connect();
-                    // Once user clicks "Connect" in Phantom, we check balance
-                    verifyBalance(resp.publicKey.toString());
-                } catch (e) {
-                    statusMsg.innerText = "CONNECTION REJECTED BY USER";
+                    const resp = await window.solana.connect();
+                    checkUSDC(resp.publicKey.toString());
+                } catch (err) {
+                    statusMsg.innerText = "CONNECTION REJECTED";
                 }
-            } else if (isMobile) {
-                const url = encodeURIComponent(window.location.href);
-                window.location.href = `https://phantom.app/ul/browse/${url}?ref=${encodeURIComponent(window.location.origin)}`;
             } else {
-                statusMsg.innerText = "PHANTOM EXTENSION NOT FOUND";
+                statusMsg.innerText = "PHANTOM NOT FOUND";
                 window.open("https://phantom.app/", "_blank");
             }
         });
