@@ -17,7 +17,7 @@
             padding: 40px;
             width: 90% !important;
             max-width: 1200px;
-            margin: 10px auto !important; /* FIXED TIGHT GAPS */
+            margin: 10px auto !important;
             box-sizing: border-box;
             text-align: center;
         }
@@ -26,7 +26,7 @@
             background: #ffffff !important;
             color: #000 !important;
             width: 240px; 
-            margin: 0 auto !important; /* CENTERED */
+            margin: 0 auto !important;
             text-align: center;
             display: block;
             padding: 14px;
@@ -34,6 +34,109 @@
             font-family: 'Bebas Neue';
             font-size: 18px;
             border: none;
+            cursor: pointer;
+        }
+        #grant-form-wrapper { display: none; margin-top: 30px; padding-top: 30px; border-top: 1px solid rgba(179, 139, 77, 0.2); }
+        .grant-input { width: 100%; max-width: 500px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(179, 139, 77, 0.3); color: white; padding: 15px; margin: 10px auto; display: block; border-radius: 5px; }
+        @media (max-width: 850px) { .gate-shell { width: 95% !important; padding: 25px; } .btn-legacy-connect { width: 100%; } }
+    </style>
+</head>
+<body>
+
+    <div class="gate-shell">
+        <p style="color: rgba(179, 139, 77, 0.6); font-size: 11px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 5px; font-weight: bold;">Security Protocol</p>
+        <h2 style="font-family: 'Bebas Neue'; font-size: 40px; color: #fff; margin: 0 0 20px 0;">BIZ SUPPORT GATE</h2>
+        <div id="wallet-status" class="status-msg">WALLET NOT CONNECTED</div>
+        <button id="connect-btn" class="btn-legacy-connect">CONNECT WALLET</button>
+
+        <div id="grant-form-wrapper">
+            <h3 style="font-family: 'Bebas Neue'; color: #00ff00; font-size: 24px; margin-bottom: 20px;">✓ STEWARD VERIFIED (USDT)</h3>
+            <form action="YOUR_GOOGLE_FORM_URL" method="POST">
+                <input type="text" class="grant-input" placeholder="Business Name" required>
+                <input type="text" class="grant-input" id="display-wallet" placeholder="Wallet Address" readonly>
+                <textarea class="grant-input" placeholder="Mission Description..." rows="4" required></textarea>
+                <button type="submit" class="btn-legacy-connect" style="background: #b38b4d !important; color: #fff !important; width: 100%; max-width: 500px;">SUBMIT REQUEST</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const USDT_MINT = "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"; 
+        const MIN_USDT = 1; 
+
+        // BACKUP RPC NODES (If one fails, it tries the next)
+        const RPC_NODES = [
+            "https://api.mainnet-beta.solana.com",
+            "https://solana-api.projectserum.com",
+            "https://rpc.ankr.com/solana"
+        ];
+
+        const connectBtn = document.getElementById('connect-btn');
+        const statusMsg = document.getElementById('wallet-status');
+        const formWrapper = document.getElementById('grant-form-wrapper');
+        const walletInput = document.getElementById('display-wallet');
+
+        async function verifyUSDT(walletAddress) {
+            statusMsg.innerText = "SCANNING BLOCKCHAIN...";
+            
+            let balanceFound = false;
+
+            for (let rpc of RPC_NODES) {
+                if (balanceFound) break;
+                try {
+                    const connection = new solanaWeb3.Connection(rpc, "confirmed");
+                    const publicKey = new solanaWeb3.PublicKey(walletAddress);
+                    const mintAddress = new solanaWeb3.PublicKey(USDT_MINT);
+                    
+                    const response = await connection.getParsedTokenAccountsByOwner(publicKey, { mint: mintAddress });
+
+                    let balance = 0;
+                    if (response.value.length > 0) {
+                        balance = response.value[0].account.data.parsed.info.tokenAmount.uiAmount || 0;
+                    }
+
+                    if (balance >= MIN_USDT) {
+                        statusMsg.style.color = "#00ff00";
+                        statusMsg.innerText = "VERIFIED: " + balance.toLocaleString() + " USDT";
+                        walletInput.value = walletAddress;
+                        formWrapper.style.display = "block";
+                        connectBtn.style.display = "none";
+                        balanceFound = true;
+                    } else {
+                        statusMsg.style.color = "#ff4444";
+                        statusMsg.innerText = "INSUFFICIENT BALANCE ($1 USDT REQUIRED)";
+                        balanceFound = true; 
+                    }
+                } catch (err) {
+                    console.log("RPC Failed, trying next...");
+                }
+            }
+
+            if (!balanceFound) {
+                statusMsg.innerText = "CONNECTION SLOW. CLICK AGAIN TO RETRY.";
+            }
+        }
+
+        connectBtn.addEventListener('click', async () => {
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            const provider = window.solana || window.solflare;
+
+            if (provider) {
+                try {
+                    const response = await provider.connect();
+                    verifyUSDT(response.publicKey.toString());
+                } catch (err) { statusMsg.innerText = "CONNECTION CANCELLED"; }
+            } else if (isMobile) {
+                const currentUrl = encodeURIComponent(window.location.href);
+                window.location.href = `https://phantom.app/ul/browse/${currentUrl}?ref=${encodeURIComponent(window.location.origin)}`;
+            } else {
+                statusMsg.innerText = "PHANTOM NOT FOUND";
+                setTimeout(() => { window.open("https://phantom.app/", "_blank"); }, 1500);
+            }
+        });
+    </script>
+</body>
+</html>
             cursor: pointer;
         }
         #grant-form-wrapper { display: none; margin-top: 30px; padding-top: 30px; border-top: 1px solid rgba(179, 139, 77, 0.2); }
