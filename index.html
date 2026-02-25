@@ -426,7 +426,37 @@
 
     </div>
 </section>
+<style>
+    .why-tompolo-container {
+    /* LOCK ALIGNMENT */
+    width: 90% !important;
+    max-width: 1200px !important;
+    margin: 20px auto !important;
+    box-sizing: border-box !important;
 
+    /* RESTORE LAYOUT */
+    display: flex !important;
+    flex-direction: row !important; /* Forces image and text to stay side-by-side */
+    align-items: center !important;
+    gap: 40px;
+    
+    /* RESTORE STYLE */
+    background: rgba(10, 10, 11, 0.9) !important;
+    border: 1px solid rgba(179, 139, 77, 0.25);
+    border-radius: 20px !important;
+    padding: 30px !important;
+    overflow: hidden;
+}
+
+/* Ensure the image doesn't shrink too much */
+.why-tompolo-image {
+    flex: 0 0 250px; /* Keeps the coin at a fixed size */
+}
+
+.why-tompolo-text-content {
+    flex: 1; /* Lets the text take up the remaining space */
+}
+</style>
 <section id="why-tompolo-section" style="margin-top: 10px !important; margin-bottom: 10px !important;">
     <div style="max-width: 1200px; width: 90%; margin: 20px auto; box-sizing: border-box; padding: 0;">
     <div class="why-fortress-wrapper" style="
