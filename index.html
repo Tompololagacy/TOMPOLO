@@ -344,33 +344,35 @@
 <style>
     /* UPDATED ABOUT SECTION CSS */
 .about-container-fixed {
-    /* 1. THE SHELL: Glass transparency and frosted blur */
-    background: rgba(10, 10, 11, 0.9) !important;
-    backdrop-filter: blur(12px);
+    /* CLEAN GLASS SHELL */
+    background: rgba(10, 10, 11, 0.85) !important;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(179, 139, 77, 0.3);
+    border-radius: 24px !important;
     
-    /* 2. LAYOUT: Matches your other sections */
-    width: 90% !important; 
-    max-width: 1200px !important;
-    margin: 0px auto !important;
-    margin-top: -30px !important; 
+    width: 90% !important;
+    max-width: 900px !important; /* Narrower for better reading on laptops */
+    margin: 40px auto !important;
+    padding: 60px 40px !important; /* Generous internal spacing */
     
-    /* Relative positioning ensures it stays on top of the section above */
-    position: relative;
-    z-index: 10;
-    border: 1px solid rgba(179, 139, 77, 0.25);
-    border-radius: 20px !important; 
-    overflow: hidden !important; 
-    position: relative;
-
-    /* THE TOP MELT: Fades the entire section container at the very top */
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%);
-    mask-image: linear-gradient(to bottom, transparent 0%, black 15%);
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 }
 
-.about-image-wrapper {
-    position: relative;
-    width: 100%;
-    line-height: 0;
+.manifesto-title {
+    font-family: 'Cinzel', serif; /* Or your preferred gold font */
+    font-size: 2.5rem;
+    color: #b38b4d;
+    margin-bottom: 30px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.manifesto-text {
+    color: #e0e0e0;
+    line-height: 1.8;
+    font-size: 1.1rem;
+    margin-bottom: 40px;
 }
 
 .about-hero-img {
