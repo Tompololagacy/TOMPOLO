@@ -2,119 +2,62 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Tompolo Legacy | Mainnet Stake Test</title>
+    <title>Tompolo Legacy | Mainnet Test</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
-    
     <style>
         html, body { background-color: #050505 !important; margin: 0; padding: 0; color: white; font-family: 'Inter', sans-serif; }
-        .stake-shell {
-            background: rgba(10, 10, 11, 0.95);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(179, 139, 77, 0.25);
-            border-radius: 20px;
-            padding: 40px;
-            width: 90% !important;
-            max-width: 1200px;
-            margin: 10px auto !important;
-            box-sizing: border-box;
-            text-align: center;
-        }
-        .status-msg { margin: 20px 0; font-weight: bold; color: #ffcc00; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
-        .btn-legacy-stake {
-            background: #ffffff !important; color: #000 !important; width: 100%; margin-top: 20px; 
-            padding: 16px; border-radius: 8px; font-family: 'Bebas Neue'; font-size: 22px; 
-            border: none; cursor: pointer; transition: 0.3s;
-        }
-        .btn-legacy-stake:hover { background: #b38b4d !important; color: #fff !important; }
-        .input-box { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(179, 139, 77, 0.3); border-radius: 10px; padding: 30px; max-width: 500px; margin: 0 auto; }
-        input[type="number"] { width: 100%; background: transparent; border: none; border-bottom: 2px solid rgba(179, 139, 77, 0.3); color: white; font-size: 28px; padding: 10px 0; text-align: center; outline: none; font-family: 'Bebas Neue'; }
+        .stake-shell { background: rgba(10, 10, 11, 0.95); backdrop-filter: blur(12px); border: 1px solid rgba(179, 139, 77, 0.25); border-radius: 20px; padding: 40px; width: 90% !important; max-width: 1200px; margin: 10px auto !important; box-sizing: border-box; text-align: center; }
+        .status-msg { margin: 20px 0; font-weight: bold; color: #ffcc00; font-size: 14px; text-transform: uppercase; }
+        .btn-legacy-stake { background: #ffffff !important; color: #000 !important; width: 100%; margin-top: 20px; padding: 16px; border-radius: 8px; font-family: 'Bebas Neue'; font-size: 22px; border: none; cursor: pointer; }
     </style>
 </head>
 <body>
-
     <section class="stake-shell">
-        <p style="color: rgba(179, 139, 77, 0.6); font-size: 11px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 5px; font-weight: bold;">Live Mainnet Protocol</p>
-        <h2 style="font-family: 'Bebas Neue'; font-size: 48px; color: #fff; margin: 0 0 10px 0;">STAKE $TPL</h2>
-        
-        <div id="connection-status" class="status-msg">WALLET DISCONNECTED</div>
-        
-        <div class="input-box">
-            <div style="font-size: 11px; color: rgba(179, 139, 77, 0.6); margin-bottom: 10px;">TEST AMOUNT (0.001 SOL)</div>
-            <input type="number" id="stake-amount" value="0.001" readonly>
-            <button id="action-btn" class="btn-legacy-stake">CONNECT PHANTOM</button>
-        </div>
-
-        <p id="tx-link" style="margin-top: 20px; font-size: 12px; display: none;">
-            <a href="" target="_blank" style="color: #b38b4d; text-decoration: underline;">View Transaction on Solana Explorer</a>
-        </p>
+        <h2 style="font-family: 'Bebas Neue'; font-size: 48px;">MAINNET TEST</h2>
+        <div id="status" class="status-msg">READY TO CONNECT</div>
+        <button id="action-btn" class="btn-legacy-stake">CONNECT WALLET</button>
     </section>
 
     <script>
-        const statusMsg = document.getElementById('connection-status');
-        const actionBtn = document.getElementById('action-btn');
-        const txLinkWrapper = document.getElementById('tx-link');
-        let userWallet = null;
+        const status = document.getElementById('status');
+        const btn = document.getElementById('action-btn');
+        let wallet = null;
 
-        // Using a reliable public RPC for Mainnet
-        const connection = new solanaWeb3.Connection("https://api.mainnet-beta.solana.com", "confirmed");
+        // FIXED: Using Ankr to bypass the 403 Forbidden error
+        const connection = new solanaWeb3.Connection("https://rpc.ankr.com/solana", "confirmed");
 
-        async function performMainnetTest() {
-            statusMsg.innerText = "PREPARING REAL TRANSACTION...";
-            
+        async function startTest() {
+            status.innerText = "GETTING BLOCKHASH...";
             try {
-                // 1. Create the Self-Transfer Transaction
-                const transaction = new solanaWeb3.Transaction().add(
+                const { blockhash } = await connection.getLatestBlockhash();
+                const tx = new solanaWeb3.Transaction().add(
                     solanaWeb3.SystemProgram.transfer({
-                        fromPubkey: userWallet,
-                        toPubkey: userWallet, // Sending to yourself
-                        lamports: 0.001 * solanaWeb3.LAMPORTS_PER_SOL, 
+                        fromPubkey: wallet,
+                        toPubkey: wallet,
+                        lamports: 0.001 * solanaWeb3.LAMPORTS_PER_SOL,
                     })
                 );
+                tx.recentBlockhash = blockhash;
+                tx.feePayer = wallet;
 
-                // 2. Get latest blockhash for the network
-                const { blockhash } = await connection.getLatestBlockhash();
-                transaction.recentBlockhash = blockhash;
-                transaction.feePayer = userWallet;
-
-                // 3. Request Signature from Phantom
-                statusMsg.innerText = "AWAITING APPROVAL IN WALLET...";
-                const { signature } = await window.solana.signAndSendTransaction(transaction);
-                
-                statusMsg.style.color = "#00ff00";
-                statusMsg.innerText = "STAKE TEST SUCCESSFUL!";
-                
-                // 4. Show Explorer Link
-                txLinkWrapper.style.display = "block";
-                txLinkWrapper.querySelector('a').href = `https://explorer.solana.com/tx/${signature}`;
-                
+                status.innerText = "AWAITING PHANTOM...";
+                const { signature } = await window.solana.signAndSendTransaction(tx);
+                status.innerText = "SUCCESS! SIGNATURE: " + signature.substring(0,8);
             } catch (err) {
-                console.error(err);
-                statusMsg.style.color = "#ff4444";
-                statusMsg.innerText = "ERROR: " + err.message;
+                status.innerText = "ERROR: " + err.message;
             }
         }
 
-        actionBtn.addEventListener('click', async () => {
-            if (!userWallet) {
-                // Connect Logic
-                if (window.solana) {
-                    try {
-                        const resp = await window.solana.connect();
-                        userWallet = resp.publicKey;
-                        statusMsg.innerText = "CONNECTED: " + userWallet.toString().substring(0,6) + "...";
-                        actionBtn.innerText = "CONFIRM STAKE TEST";
-                    } catch (err) {
-                        statusMsg.innerText = "CONNECTION REFUSED";
-                    }
-                } else {
-                    statusMsg.innerText = "PHANTOM NOT FOUND";
-                    window.open("https://phantom.app/", "_blank");
-                }
+        btn.addEventListener('click', async () => {
+            if (!wallet) {
+                const resp = await window.solana.connect();
+                wallet = resp.publicKey;
+                status.innerText = "CONNECTED";
+                btn.innerText = "START SELF-TRANSFER TEST";
             } else {
-                // Stake Logic
-                performMainnetTest();
+                startTest();
             }
         });
     </script>
