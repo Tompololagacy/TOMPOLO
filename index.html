@@ -426,27 +426,14 @@
 
     </div>
 </section>
-<section id="why-tompolo-section" style="width: 100%; display: flex; justify-content: center; margin: 40px 0 !important; padding: 0;">
-    
-    <div class="why-fortress-wrapper" style="
-        width: 90% !important;
-        max-width: 1200px !important;
-        background: rgba(10, 10, 11, 0.9) !important; 
-        backdrop-filter: blur(12px) !important;
-        border: 1px solid rgba(179, 139, 77, 0.25) !important;
-        border-radius: 20px !important;
-        display: flex;
-        flex-direction: row; 
-        align-items: center;
-        padding: 50px 40px;
-        box-sizing: border-box !important;
-        overflow: hidden;">
+<section id="why-tompolo-section" class="universal-shell">
+    <div class="why-fortress-layout" style="display: flex; flex-direction: row; align-items: center; width: 100%;">
 
         <div class="why-img-column" style="flex: 1; display: flex; justify-content: center;">
             <img src="Tomp1.png" alt="Tompolo Strategy" style="width: 250px; height: 250px; border-radius: 50%; border: 2px solid #ffcc00; box-shadow: 0 0 25px rgba(255, 204, 0, 0.4); object-fit: cover;">
         </div>
 
-        <div class="why-text-column" style="flex: 1.8; padding-left: 60px; box-sizing: border-box; text-align: left;">
+        <div class="why-text-column" style="flex: 1.8; padding-left: 50px; box-sizing: border-box; text-align: left;">
             <div style="color: rgba(255, 255, 255, 0.35); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; font-weight: bold;">STRATEGIC VISION</div>
             <h2 style="color: #ffcc00; font-family: 'Bebas Neue', sans-serif; font-size: 45px; margin: 0 0 20px 0; line-height: 1;">WHY TOMPOLOCOIN?</h2>
             <p style="color: rgba(255, 255, 255, 0.85); line-height: 1.8; margin: 0; font-size: 1.1rem;">
@@ -457,17 +444,21 @@
     </div>
 
     <style>
-        /* MOBILE VIEW: Keeps text left-aligned while stacking */
+        /* This ensures that on Windows, this section follows your Universal Shell rules */
+        #why-tompolo-section {
+            display: block !important; /* Overrides the flex-center bug */
+        }
+
+        /* MOBILE VIEW: Stacks the items but keeps text LEFT aligned */
         @media (max-width: 900px) {
-            .why-fortress-wrapper {
+            .why-fortress-layout {
                 flex-direction: column !important;
-                padding: 40px 25px !important;
-                width: 95% !important; /* Slightly wider on mobile for better fit */
             }
             .why-text-column {
                 padding-left: 0 !important;
                 margin-top: 30px !important;
-                text-align: left !important; /* Forces Left alignment on mobile */
+                text-align: left !important; /* Keeps text left as requested */
+                width: 100% !important;
             }
             .why-img-column img {
                 width: 180px !important;
