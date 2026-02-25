@@ -59,33 +59,6 @@
 /* --- THE MASTER ALIGNMENT FIX --- */
 
 /* 1. This forces every main section to have the EXACT same width and centering */
-.hero-wrapper .section-container,
-.about-container-fixed,
-.universal-shell,
-.roadmap-main-container,
-.token-main-container {
-    width: 90% !important;
-    max-width: 1200px !important;
-    margin: 0 auto 60px auto !important; /* This 60px creates the uniform gap */
-    padding: 40px !important;
-    box-sizing: border-box !important;
-    display: block !important;
-}
-
-/* 2. This makes the gaps identical on Mobile */
-@media screen and (max-width: 900px) {
-    .hero-wrapper .section-container,
-    .about-container-fixed,
-    .universal-shell,
-    .roadmap-main-container,
-    .token-main-container {
-        width: 95% !important;
-        margin-bottom: 30px !important; /* Smaller gap for mobile screens */
-        padding: 25px 20px !important;
-    }
-}
-
-/* 3. Smooth scrolling so the menu doesn't 'jump' */
 html {
     scroll-behavior: smooth;
 }
