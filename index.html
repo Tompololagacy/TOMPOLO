@@ -426,39 +426,7 @@
 
     </div>
 </section>
-<style>
-    .why-tompolo-container {
-    /* LOCK ALIGNMENT */
-    width: 90% !important;
-    max-width: 1200px !important;
-    margin: 20px auto !important;
-    box-sizing: border-box !important;
-
-    /* RESTORE LAYOUT */
-    display: flex !important;
-    flex-direction: row !important; /* Forces image and text to stay side-by-side */
-    align-items: center !important;
-    gap: 40px;
-    
-    /* RESTORE STYLE */
-    background: rgba(10, 10, 11, 0.9) !important;
-    border: 1px solid rgba(179, 139, 77, 0.25);
-    border-radius: 20px !important;
-    padding: 30px !important;
-    overflow: hidden;
-}
-
-/* Ensure the image doesn't shrink too much */
-.why-tompolo-image {
-    flex: 0 0 250px; /* Keeps the coin at a fixed size */
-}
-
-.why-tompolo-text-content {
-    flex: 1; /* Lets the text take up the remaining space */
-}
-</style>
-
-<section id="why-tompolo-section" style="margin: 20px 0 !important;">
+<section id="why-tompolo-section" style="margin: 20px 0 !important; width: 100%;">
     <div class="why-fortress-wrapper" style="
         background: rgba(10, 10, 11, 0.9) !important; 
         backdrop-filter: blur(12px) !important;
@@ -467,51 +435,43 @@
         display: flex;
         flex-direction: row; 
         align-items: center;
+        /* THIS ALIGNS IT WITH THE OTHERS */
         width: 90% !important;
         max-width: 1200px !important;
-        margin: 0 auto !important; /* Centers the box to match Manifesto */
+        margin: 0 auto !important; 
         box-sizing: border-box !important;
         overflow: hidden;
         padding: 40px;">
 
         <div class="why-img-column" style="flex: 1; display: flex; justify-content: center;">
-            <img src="Tomp1.png" alt="Tompolo Strategy" class="why-glow-img" style="width: 250px; height: 250px; border-radius: 50%; border: 2px solid #ffcc00; box-shadow: 0 0 25px rgba(255, 204, 0, 0.6); object-fit: cover;">
+            <img src="Tomp1.png" alt="Tompolo Strategy" style="width: 220px; height: 220px; border-radius: 50%; border: 2px solid #ffcc00; box-shadow: 0 0 20px rgba(255, 204, 0, 0.4); object-fit: cover;">
         </div>
 
-        <div class="why-text-column" style="flex: 1.5; padding-left: 40px; box-sizing: border-box;">
+        <div class="why-text-column" style="flex: 2; padding-left: 50px; box-sizing: border-box;">
             <div style="color: rgba(255, 255, 255, 0.35); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; font-weight: bold;">STRATEGIC VISION</div>
             <h2 style="color: #ffcc00; font-family: 'Bebas Neue', sans-serif; font-size: 42px; margin-bottom: 20px; line-height: 1;">WHY TOMPOLOCOIN?</h2>
-            <p style="color: rgba(255, 255, 255, 0.85); line-height: 1.8; margin: 0; font-size: 1.05rem;">
-                Most coins are ghosts paper thin promises that vanish in a week. We aren't here to play house; we’re here to build a fortress.<br><br>
+            <p style="color: rgba(255, 255, 255, 0.85); line-height: 1.8; margin: 0; font-size: 1.1rem;">
+                Most coins are ghosts—paper thin promises that vanish in a week. We aren't here to play house; we’re here to build a fortress.<br><br>
                 If you want the throne, stay here.
             </p>
         </div>
     </div>
 
     <style>
-        /* MOBILE ALIGNMENT FIX */
-        @media (max-width: 900px) {
+        /* This ensures that on small laptop screens and mobile, it stays centered */
+        @media (max-width: 1024px) {
             .why-fortress-wrapper {
                 flex-direction: column !important;
+                text-align: center !important;
                 padding: 40px 20px !important;
-                width: 90% !important;
             }
-            .why-img-column { 
-                margin-bottom: 25px !important; 
+            .why-text-column {
+                padding-left: 0 !important;
+                margin-top: 30px;
             }
-            .why-img-column img {
-                width: 150px !important; 
-                height: 150px !important;
-            }
-            .why-text-column { 
-                padding-left: 0 !important; 
-                text-align: center !important; 
-            }
-            .why-text-column h2 { font-size: 36px !important; }
         }
     </style>
 </section>
-
 
 <style>
     /* THE MASTER GRID WRAPPER */
