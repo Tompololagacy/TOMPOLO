@@ -426,30 +426,31 @@
 
     </div>
 </section>
-<section id="why-tompolo-section" style="margin: 20px 0 !important; width: 100%;">
+<section id="why-tompolo-section" style="width: 100%; margin: 30px 0 !important; display: flex; justify-content: center;">
     <div class="why-fortress-wrapper" style="
+        /* 1. MATCHING SHELL: Locks alignment with Manifesto/Utility */
+        width: 90% !important;
+        max-width: 1200px !important;
         background: rgba(10, 10, 11, 0.9) !important; 
         backdrop-filter: blur(12px) !important;
         border: 1px solid rgba(179, 139, 77, 0.25) !important;
         border-radius: 20px !important;
+        box-sizing: border-box !important;
+        
+        /* 2. DESKTOP LAYOUT */
         display: flex;
         flex-direction: row; 
         align-items: center;
-        /* THIS ALIGNS IT WITH THE OTHERS */
-        width: 90% !important;
-        max-width: 1200px !important;
-        margin: 0 auto !important; 
-        box-sizing: border-box !important;
-        overflow: hidden;
-        padding: 40px;">
+        padding: 50px 40px;
+        overflow: hidden;">
 
         <div class="why-img-column" style="flex: 1; display: flex; justify-content: center;">
-            <img src="Tomp1.png" alt="Tompolo Strategy" style="width: 220px; height: 220px; border-radius: 50%; border: 2px solid #ffcc00; box-shadow: 0 0 20px rgba(255, 204, 0, 0.4); object-fit: cover;">
+            <img src="Tomp1.png" alt="Tompolo Strategy" style="width: 250px; height: 250px; border-radius: 50%; border: 2px solid #ffcc00; box-shadow: 0 0 25px rgba(255, 204, 0, 0.5); object-fit: cover;">
         </div>
 
-        <div class="why-text-column" style="flex: 2; padding-left: 50px; box-sizing: border-box;">
+        <div class="why-text-column" style="flex: 1.8; padding-left: 50px; box-sizing: border-box; text-align: left;">
             <div style="color: rgba(255, 255, 255, 0.35); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; font-weight: bold;">STRATEGIC VISION</div>
-            <h2 style="color: #ffcc00; font-family: 'Bebas Neue', sans-serif; font-size: 42px; margin-bottom: 20px; line-height: 1;">WHY TOMPOLOCOIN?</h2>
+            <h2 style="color: #ffcc00; font-family: 'Bebas Neue', sans-serif; font-size: 42px; margin: 0 0 20px 0; line-height: 1;">WHY TOMPOLOCOIN?</h2>
             <p style="color: rgba(255, 255, 255, 0.85); line-height: 1.8; margin: 0; font-size: 1.1rem;">
                 Most coins are ghosts—paper thin promises that vanish in a week. We aren't here to play house; we’re here to build a fortress.<br><br>
                 If you want the throne, stay here.
@@ -458,16 +459,21 @@
     </div>
 
     <style>
-        /* This ensures that on small laptop screens and mobile, it stays centered */
-        @media (max-width: 1024px) {
+        /* MOBILE VIEW: Stacks items but keeps text LEFT aligned */
+        @media (max-width: 900px) {
             .why-fortress-wrapper {
                 flex-direction: column !important;
-                text-align: center !important;
-                padding: 40px 20px !important;
+                padding: 40px 25px !important;
             }
             .why-text-column {
                 padding-left: 0 !important;
-                margin-top: 30px;
+                margin-top: 35px !important;
+                text-align: left !important; /* Forces left-alignment on mobile */
+                width: 100% !important;
+            }
+            .why-img-column img {
+                width: 180px !important;
+                height: 180px !important;
             }
         }
     </style>
