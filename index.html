@@ -344,16 +344,18 @@
 <style>
     /* UPDATED ABOUT SECTION CSS */
 .about-container-fixed {
-    /* LOCK WIDTH */
-    width: 90% !important; 
-    max-width: 1200px !important; 
-    margin: 0 auto 20px auto !important; /* Centers it and adds bottom gap */
-    
-    /* SYNC BORDER & SHAPE */
-    border: 1px solid rgba(179, 139, 77, 0.25) !important;
+    /* LOCK ALIGNMENT */
+    width: 90% !important;
+    max-width: 1200px !important;
+    margin: 0 auto 20px auto !important;
+    box-sizing: border-box !important;
+
+    /* RESTORE STYLE */
+    background: rgba(10, 10, 11, 0.95) !important; /* Deep dark glass */
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(179, 139, 77, 0.3);
     border-radius: 20px !important;
     padding: 40px 20px !important;
-    box-sizing: border-box !important;
 }
 
 .about-hero-img {
