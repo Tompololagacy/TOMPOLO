@@ -2,40 +2,6 @@
     /* MOBILE VIEW ADJUSTMENTS */
  /* MOBILE VIEW ADJUSTMENTS */
 /* THE UNIVERSAL CONTAINER LOGIC */
-.universal-shell {
-    background: rgba(10, 10, 11, 0.9);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(179, 139, 77, 0.25);
-    border-radius: 20px;
-    padding: 30px 20px;
-    box-sizing: border-box !important;
-    width: 90% !important; 
-    
-    /* THE FIX: Sets a small, consistent gap for all devices */
-    margin: 10px auto !important; 
-}
-
-@media screen and (min-width: 1024px) {
-    .universal-shell {
-        width: 100% !important;
-        max-width: 1200px !important; 
-        /* Match the 10px vertical gap on Windows/Laptop */
-        margin: 10px auto !important;
-        padding: 50px 40px;
-    }
-}
-
-/* ADD THIS: Forces every section to stop adding extra margins */
-#about, 
-#why-tompolo-section, 
-#utility-section, 
-#roadmap-section, 
-#tokenomics-section {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-}
 
 .dark-gold-glow {
     box-shadow: 0 0 20px rgba(179, 139, 77, 0.4); /* Uses your tan/gold color */
