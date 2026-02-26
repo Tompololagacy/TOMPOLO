@@ -23,7 +23,16 @@
         margin-top: 15px !important; 
     margin-bottom: 15px !important;
     }
-
+/* FORCES ALL SECTIONS TO SIT TIGHT LIKE GAP 1 */
+    @media screen and (min-width: 1024px) {
+    #utility-section, 
+    #roadmap-section, 
+    #tokenomics-section {
+        margin-top: 5px !important;    /* Forces 5px space above */
+        margin-bottom: 5px !important; /* Forces 5px space below */
+        padding-top: 30px !important;  /* Normalizes internal space */
+    }
+}
     @media screen and (min-width: 1024px) {
         .universal-shell {
             /* WINDOWS VIEW: Matches the Manifesto Image width */
@@ -61,6 +70,17 @@
 /* 1. This forces every main section to have the EXACT same width and centering */
 html {
     scroll-behavior: smooth;
+}
+
+    /* FORCES ALL SECTIONS TO SIT TIGHT LIKE GAP 1 */
+@media screen and (min-width: 1024px) {
+    #utility-section, 
+    #roadmap-section, 
+    #tokenomics-section {
+        margin-top: 5px !important;    /* Forces 5px space above */
+        margin-bottom: 5px !important; /* Forces 5px space below */
+        padding-top: 30px !important;  /* Normalizes internal space */
+    }
 }
 </style>
 </head>
@@ -382,22 +402,6 @@ html {
     .about-text-content {
         padding: 40px;
     }
-
-      /* THE MASTER BALANCE: This forces Windows to match Mobile gaps exactly */
-    @media screen and (min-width: 1024px) {
-
-        .about-container-fixed,
-        #why-tompolo-section,
-        #utility-section,
-        #roadmap-section,
-        #tokenomics-section {
-            width: 100% !important;
-            max-width: 1200px !important;
-            /* This is the line that fixes the balance: */
-            margin: 10px auto !important;
-            padding: 40px !important;
-        }
-    }
 </style>
 
 <section class="about-section" id="about">
@@ -535,7 +539,7 @@ html {
     }
 </style>
 
-<section id="utility-section" class="universal-shell" style="margin-top: 5px !important; margin-bottom: 5px !important;">
+<section id="utility-section" class="universal-shell">
     <div style="max-width: 1200px; width: 90%; margin: 15px auto; box-sizing: border-box; padding: 30px  40px !important;">
      
      <p style="color: rgba(179, 139, 77, 0.6); font-size: 11px; letter-spacing: 4px; text-transform: uppercase; margin: 0; font-weight: bold;">Ecosystem power & Government</p>
@@ -641,9 +645,7 @@ html {
         width: 90%;
         max-width: 1200px;
         margin: 30px auto !important; /* Forces consistent gap */
-        margin-top: 5px !important;
-        margin-bottom: 5px !important;
-    }
+           }
 
     .roadmap-main-container {
         background: #080809; 
@@ -753,7 +755,7 @@ html {
     }
 </style>
 
-<section id="roadmap-section" style="margin: 10px auto !important;">
+<section id="roadmap-section">
     <div class="roadmap-main-container">
         
         <div style="max-width: 1200px; width: 90%; margin: 15px auto; box-sizing: border-box; padding: 0;">
@@ -819,7 +821,7 @@ html {
     #tokenomics-section {
         width: 90%;
         max-width: 1200px;
-        margin: 10px auto !important;
+       
     }
 
     .token-main-container {
@@ -940,7 +942,7 @@ html {
     }
 </style>
 
-<section id="tokenomics-section" style="margin: 10px auto !important;">
+<section id="tokenomics-section">
     <div class="token-main-container">
         
                
